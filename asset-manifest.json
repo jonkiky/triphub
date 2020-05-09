@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/triphub/static/css/main.df982891.chunk.css",
-    "main.js": "/triphub/static/js/main.a3fe97f8.chunk.js",
-    "main.js.map": "/triphub/static/js/main.a3fe97f8.chunk.js.map",
-    "runtime-main.js": "/triphub/static/js/runtime-main.09093eb6.js",
-    "runtime-main.js.map": "/triphub/static/js/runtime-main.09093eb6.js.map",
-    "static/js/2.bb1a9a73.chunk.js": "/triphub/static/js/2.bb1a9a73.chunk.js",
-    "static/js/2.bb1a9a73.chunk.js.map": "/triphub/static/js/2.bb1a9a73.chunk.js.map",
-    "index.html": "/triphub/index.html",
-    "precache-manifest.e34df21dfa39a39923f880e38f7e4ccc.js": "/triphub/precache-manifest.e34df21dfa39a39923f880e38f7e4ccc.js",
-    "service-worker.js": "/triphub/service-worker.js",
-    "static/css/main.df982891.chunk.css.map": "/triphub/static/css/main.df982891.chunk.css.map",
-    "static/js/2.bb1a9a73.chunk.js.LICENSE.txt": "/triphub/static/js/2.bb1a9a73.chunk.js.LICENSE.txt",
-    "static/media/logo.svg": "/triphub/static/media/logo.5d5d9eef.svg",
-    "static/media/not-found-image.jpg": "/triphub/static/media/not-found-image.defc1297.jpg"
+    "main.css": "/static/css/main.df982891.chunk.css",
+    "main.js": "/static/js/main.69cf30aa.chunk.js",
+    "main.js.map": "/static/js/main.69cf30aa.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.3763ffd3.js",
+    "runtime-main.js.map": "/static/js/runtime-main.3763ffd3.js.map",
+    "static/js/2.bb1a9a73.chunk.js": "/static/js/2.bb1a9a73.chunk.js",
+    "static/js/2.bb1a9a73.chunk.js.map": "/static/js/2.bb1a9a73.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.073e1a3067928cfa24097648c4bdc8d8.js": "/precache-manifest.073e1a3067928cfa24097648c4bdc8d8.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.df982891.chunk.css.map": "/static/css/main.df982891.chunk.css.map",
+    "static/js/2.bb1a9a73.chunk.js.LICENSE.txt": "/static/js/2.bb1a9a73.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/static/media/logo.5d5d9eef.svg",
+    "static/media/not-found-image.jpg": "/static/media/not-found-image.defc1297.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.09093eb6.js",
+    "static/js/runtime-main.3763ffd3.js",
     "static/js/2.bb1a9a73.chunk.js",
     "static/css/main.df982891.chunk.css",
-    "static/js/main.a3fe97f8.chunk.js"
+    "static/js/main.69cf30aa.chunk.js"
   ]
 }
