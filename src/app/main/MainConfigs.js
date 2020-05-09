@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import about from './about/AboutView';
 import error404 from './errors/404';
 import search from './search/SearchController';
@@ -11,10 +10,6 @@ const Config = {
 		layout: {}
 	},
 	routes: [
-		{
-			path: '/about-us',
-			component: about
-		},
 		{
 			path: '/search',
 			component: search
