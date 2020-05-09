@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/triphub/static/css/main.df982891.chunk.css",
+    "main.js": "/triphub/static/js/main.97154d10.chunk.js",
+    "main.js.map": "/triphub/static/js/main.97154d10.chunk.js.map",
+    "runtime-main.js": "/triphub/static/js/runtime-main.09093eb6.js",
+    "runtime-main.js.map": "/triphub/static/js/runtime-main.09093eb6.js.map",
+    "static/js/2.217965b3.chunk.js": "/triphub/static/js/2.217965b3.chunk.js",
+    "static/js/2.217965b3.chunk.js.map": "/triphub/static/js/2.217965b3.chunk.js.map",
+    "index.html": "/triphub/index.html",
+    "precache-manifest.85e9deb179349d161def14ffec098208.js": "/triphub/precache-manifest.85e9deb179349d161def14ffec098208.js",
+    "service-worker.js": "/triphub/service-worker.js",
+    "static/css/main.df982891.chunk.css.map": "/triphub/static/css/main.df982891.chunk.css.map",
+    "static/js/2.217965b3.chunk.js.LICENSE.txt": "/triphub/static/js/2.217965b3.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/triphub/static/media/logo.5d5d9eef.svg",
+    "static/media/not-found-image.jpg": "/triphub/static/media/not-found-image.defc1297.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.09093eb6.js",
+    "static/js/2.217965b3.chunk.js",
+    "static/css/main.df982891.chunk.css",
+    "static/js/main.97154d10.chunk.js"
+  ]
+}
