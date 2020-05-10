@@ -1,12 +1,11 @@
 import React,{useState} from 'react';
-import '../../../styles/main_styles.css';
-import '../../../styles/responsive.css';
 import logo from '../../../logo.svg';
 import { useHistory } from 'react-router-dom';
 import BarLoader from "react-spinners/BarLoader";
 import { css } from "@emotion/core";
 import Skeleton from 'react-loading-skeleton';
-
+import '../../../styles/main_styles.css';
+import '../../../styles/responsive.css';
 
 function HomeView(props) {
 
@@ -59,70 +58,12 @@ const override = css`
           loading={props.loading}
         />
       </div>
-	<header class="header">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="header_content d-flex flex-row align-items-center justify-content-start">
-						<div class="header_content_inner d-flex flex-row align-items-end justify-content-start">
-							<div class="logo"><a href="index.html">Travello</a></div>
-							<nav class="main_nav">
-								<ul class="d-flex flex-row align-items-start justify-content-start">
-									<li class="active"><a href="index.html">HOME</a></li>
-									<li><a href="about.html">ABOUT  US</a></li>
-									<li><a href="contact.html">CONTACT</a></li>
-								</ul>
-							</nav>
-						
 
-							<div class="hamburger ml-auto">
-								<i class="fa fa-bars" aria-hidden="true"></i>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-
-
-	<div class="menu">
-		<div class="menu_header d-flex flex-row align-items-center justify-content-start">
-			<div class="menu_logo"><a href="index.html">Travello</a></div>
-			<div class="menu_close_container ml-auto"><div class="menu_close"><div></div><div></div></div></div>
-		</div>
-		<div class="menu_content">
-			<ul>
-				<li><a href="index.html">HOME</a></li>
-				<li><a href="about.html">ABOUT  US</a></li>
-				<li><a href="contact.html">CONTACT</a></li>
-			</ul>
-		</div>
-	</div>
 	
 
 	<div class="home">
 		
 		<div class="home_slider_container">
-			<div class="owl-carousel owl-theme home_slider">
-				
-				<div class="owl-item">
-					<div class="background_image" style={{backgroundImage: 'url(images/tokyo-luv-CsMNgdHXzFs-unsplash.jpg)'}}></div>
-					<div class="home_slider_content_container">
-						<div class="container">
-							<div class="row">
-								<div class="col">
-									<div class="home_slider_content">
-										<div class="home_title"><h2>Adventure is out there.</h2></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="owl-item">
 					<div class="background_image" style={{backgroundImage: 'url(images/tokyo-luv-CsMNgdHXzFs-unsplash.jpg)'}}></div>
 					<div class="home_slider_content_container">
 						<div class="container">
@@ -135,8 +76,6 @@ const override = css`
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 
@@ -201,8 +140,8 @@ const override = css`
 
 
 	<footer class="footer">
-		<div class="parallax-mirror" style={{"visibility": "visible","z-index": "-100","position": "fixed", "top": "0px", "left": "0px", "overflow": "hidden", "transform":" translate3d(0px, 476px, 0px)", "height": "400px", "width": "1295px"}}>
-			<img class="parallax-slider" src="images/footer_1.jpg" style={{"transform": "translate3d(0px, -57.2px, 0px)","position": "absolute", "height": "505px", "width": "1295px", "max-width": "none"}}/>
+		<div class="parallax-mirror" style={{"visibility": "visible","z-index": "-100","position": "fixed", "top": "0px", "left": "0px", "overflow": "hidden", "transform":" translate3d(0px, 476px, 0px)", "height": "400px", "width": "100%"}}>
+			<img class="parallax-slider" src="images/footer_1.jpg" style={{"transform": "translate3d(0px, -57.2px, 0px)","position": "absolute", "height": "505px", "width": "100%", "max-width": "none"}}/>
 		</div>
 		<div class="container">
 	

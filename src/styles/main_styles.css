@@ -570,7 +570,7 @@ section
 .home_slider_content_container
 {
 	position: absolute;
-	top: 31.5%;
+	top: 25% !important;
 	left: 0;
 	width: 100%;
 	z-index: 1;
@@ -657,20 +657,20 @@ section
 .home_search_container
 {
 	position: absolute;
-	top: -353px;
-	width: calc(100% + 122px);
-	left: -61px;
-	padding-top: 47px;
-	padding-left: 61px;
-	padding-right: 61px;
-	padding-bottom: 59px;
+	top: -253px !important;
+	width: calc(100% + 62px) !im\portant;
+	left: -31px !important;
+	padding-top: 25px !important;
+	padding-left: 31px !important;
+	padding-right: 31px !important;
+	padding-bottom: 25px !important;
 	background: rgba(255,255,255,0.26);
 	border-radius: 12px;
 }
 .home_search_title
 {
 	width: 247px;
-	height: 55px;
+	height: 45px !important;
 	background: #FFFFFF;
 	margin-left: auto;
 	margin-right: auto;
