@@ -31,11 +31,23 @@ const override = css`
 `;  
 
 
+const with_grey_border ={
+'boxShadow': '0 2px 18px rgba(0,0,0,.15)'
+};  
+
 
 const [state,setState] = useState({
 	show:false,
+	map_lat:null,   // interactive with map
+	map_lng:null,	// interactive with map
   });
 
+   const handleMap= (map_lat,map_lng) => {
+   	let c_state = Object.assign({}, state);
+  	c_state["map_lat"]=map_lat;
+  	c_state["map_lng"]=map_lng;
+  	setState(c_state);
+   }
 
 
   const handleClose = () => {
@@ -63,6 +75,15 @@ function  handlePageChange(pageNumber) {
  const updateRadioOption=(option,cate)=>{
  	props.updateRadioOption(option,cate);
  }
+
+
+ const onMouseEnterContent = (lat,lng) => {
+    handleMap(lat,lng)
+  }
+
+ const onMouseLeaveContent = (/*e*/) => {
+    handleMap(null,null)
+  }
 
 
 return (
@@ -195,7 +216,11 @@ return (
 												
 									props.data!=null?props.data.map((place)=>{
 										return(
-												<div className="latest_post justify-content-start col-lg-6 col-sm-12 col-md-6">
+												<div 
+												onMouseEnter={()=>onMouseEnterContent(place.lat,place.lng)}
+         										onMouseLeave={onMouseLeaveContent}
+          										style={place.lat==state.map_lat&&place.lng==state.map_lng? with_grey_border:null} 
+          										className="latest_post justify-content-start col-lg-6 col-sm-12 col-md-6" >
 													<div className="latest_post_image">
 													<PlaceImage url={
 														"https://gitlab.com/api/v4/projects/18679138/repository/files/"+place.state + "@" + place.place_name.replace(/\s+/g, "_").replace("/", "").replace("'","") + "@" + place.id + ".json?ref=master"
@@ -203,7 +228,7 @@ return (
 													<div className="latest_post_text post-action">
 															<i className="far fa-heart"></i>
 														</div>	
-													<div className="latest_post_content">
+													<div className="latest_post_content" sty>
 														<div className="latest_post_title">
 															<a href="#" data-toggle="modal" data-target="#detailModal" onClick={()=>handleShow(place.address)}>
 																{place.place_name}
@@ -255,7 +280,7 @@ return (
 									<div id="google_map" className="google_map">
 										<div className="map_container">
 											<div id="map">
-												<SimpleMap lat={props.lat} lng={props.lng} data={props.data}/>
+												<SimpleMap lat={props.lat} lng={props.lng} data={props.data} handleMapHover={handleMap} target_lat={state.map_lat} target_lng={state.map_lng}/>
 											</div>
 										</div>
 									</div>
