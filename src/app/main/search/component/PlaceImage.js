@@ -6,7 +6,7 @@ import Img from '../../../assets/images/not-found-image.jpg'
 
 function PlaceImage(props) {
 
-const	[img,setImg] = useState(null)
+const	[img,setImg] = useState("")
 
 useEffect(() => {
       try {
@@ -26,7 +26,7 @@ useEffect(() => {
       }
   },[props.url]);
 
-return img == null?<img src={Img}/>:<div className="content" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(img)}}></div>
+return img == ""?<img src={Img}/>:<div className="content" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(img)}}></div>
 
 }
 

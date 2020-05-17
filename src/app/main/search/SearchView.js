@@ -22,6 +22,9 @@ import PlaceImage from "./component/PlaceImage";
 
 function SearchView(props) {
 
+
+console.log(props.lat)
+
 const override = css`
   display: block;
   width:100%;
@@ -30,36 +33,9 @@ const override = css`
 
 
 const [state,setState] = useState({
-	default_distance:10,
-	thingsTodos:null,
-	thingsTodos_all:[],
-	activePage:1,
-	activePageContent:null,
-	itemsCountPerPage:20,
 	show:false,
-	radio:{
-	  		d_option:"5_miles",
-	  		s_option:"review",
-	  	}
   });
 
-  useEffect(() => {
-
-  	if(props.data && state["thingsTodos"]==null){
-		let c_state = Object.assign({}, state);
-		if(props.data!=null){
-			let unq_places =Array.from(new Set(props.data.map(place => place.place_name)))
-				 .map(name => {
-				   return props.data.find(place => place.place_name === name)
-				 });
-			let places = unq_places.filter((d)=>d.distance<state['default_distance']).sort((a,b)=>a.review-b.review)
-			c_state["thingsTodos"]= places;
-			c_state["thingsTodos_all"]=unq_places;
-	  		setState(c_state);
-		}
-	}
-
-  })
 
 
   const handleClose = () => {
@@ -67,10 +43,10 @@ const [state,setState] = useState({
   	c_state["show"]=false;
   	setState(c_state);
   };
-  const handleShow = (place_city,id) => {
+  const handleShow = (addr) => {
   	let c_state = Object.assign({}, state);
   	c_state["show"]=true;
-  	c_state["activePageContent"]=c_state['thingsTodos_all'].filter(place=> place.id ==id && place.city == place_city)
+  	c_state["activePageContent"]=props.data.filter(place=> place.address ==addr)
   	setState(c_state);
   };
 
@@ -81,47 +57,11 @@ function handleSearch(e,search){
 
 
 function  handlePageChange(pageNumber) {
-	let c_state = Object.assign({}, state);
-	c_state["activePage"]=pageNumber;
-    setState(c_state);
+	props.handlePageChange(pageNumber)
  }
 
  const updateRadioOption=(option,cate)=>{
- 	let c_state = Object.assign({}, state);
- 	c_state["radio"][cate] = option;
- 	if(cate == "d_option"){
- 		switch(option) {
-			  case "5_miles":
-			   c_state["thingsTodos"]=c_state["thingsTodos_all"].filter((d)=>d.distance<15)
-			    break;
-			  case "half_day":
-			    c_state["thingsTodos"]=c_state["thingsTodos_all"].filter((d)=>d.distance>=15&&d.distance<40)
-			    break;
-			  case "one_day":
-			    c_state["thingsTodos"]=c_state["thingsTodos_all"].filter((d)=>d.distance>45&&d.distance<120)
-			    break;
-			  case "two_day":
-			    c_state["thingsTodos"]=c_state["thingsTodos_all"].filter((d)=>d.distance>120&&d.distance<220)
-			    break;
-			}
- 	}
-
- 	if(cate == "s_option"){
- 		switch(option) {
-			  case "review":
-			   c_state["thingsTodos"]=c_state["thingsTodos"].sort((a,b)=>a.review-b.review)
-			    break;
-			  case "distanceN":
-			    c_state["thingsTodos"]=c_state["thingsTodos"].sort((a,b)=>a.distance-b.distance)
-			    break;
-			  case "distanceF":
-			    c_state["thingsTodos"]=c_state["thingsTodos"].sort((a,b)=>b.distance-a.distance)
-			    break;
-		
-			}
- 	}
-
- 	setState(c_state)
+ 	props.updateRadioOption(option,cate);
  }
 
 
@@ -173,7 +113,7 @@ return (
 								<b>Things TO Do Near: </b>
 							</div>
 							<div className="loader_title">
-								{ props.geolocation.addr}
+								{ props.geolocation} {' '} {props.totalNumberOfRecords}
 							</div>
 						</div>
 					</div>
@@ -186,28 +126,28 @@ return (
 												<div >
 													<label className={className({
 														'filter-button': true,
-  														'active': state&&state.radio&&state.radio.d_option == "5_miles",
+  														'active': props.state&&props.state.filter_distance&&props.state.filter_distance == "5_miles",
 													})}>
-													    <input type="radio" name="d_options" id="d-option1"   checked={state&&state.radio&&state.radio.d_option == "5_miles" }  value="5miles" onChange={()=>updateRadioOption("5_miles","d_option")}/> <span>Within 10 miles</span> 
+													    <input type="radio" name="d_options" id="d-option1"   checked={props.state&&props.state.filter_distance&&props.state.filter_distance == "5_miles" }  value="5miles" onChange={()=>updateRadioOption("5_miles","d_option")}/> <span>Within 10 miles</span> 
 													</label>
 													<label className={className({
 														'filter-button': true,
-  														'active': state&&state.radio&&state.radio.d_option == "half_day",
+  														'active': props.state&&props.state.filter_distance&&props.state.filter_distance == "half_day",
 													})}>
-													    <input type="radio" name="d_options" id="d-option2" checked={state&&state.radio&&state.radio.d_option == "half_day" } onChange={()=>updateRadioOption("half_day","d_option")} /> 
+													    <input type="radio" name="d_options" id="d-option2" checked={props.state&&props.state.filter_distance&&props.state.filter_distance == "half_day" } onChange={()=>updateRadioOption("half_day","d_option")} /> 
 													    Half-Day Tours
 													</label>
 													<label className={className({
 														'filter-button': true,
-  														'active': state&&state.radio&&state.radio.d_option == "one_day",
+  														'active': props.state&&props.state.filter_distance&&props.state.filter_distance == "one_day",
 													})}>
-													    <input type="radio" name="d_options" id="d-option3" checked={state&&state.radio&&state.radio.d_option == "one_day" }  onChange={()=>updateRadioOption("one_day","d_option")}/>  One-Day Tours
+													    <input type="radio" name="d_options" id="d-option3" checked={props.state&&props.state.filter_distance&&props.state.filter_distance == "one_day" }  onChange={()=>updateRadioOption("one_day","d_option")}/>  One-Day Tours
 													</label>
 													<label className={className({
 														'filter-button': true,
-  														'active': state&&state.radio&&state.radio.d_option == "two_day",
+  														'active': props.state&&props.state.filter_distance&&props.state.filter_distance == "two_day",
 													})}  >
-													    <input type="radio" name="d_options" id="d-option3" checked={state&&state.radio&&state.radio.d_option == "two_day" }  onChange={()=>updateRadioOption("two_day","d_option")}/>  Two-Day Tours
+													    <input type="radio" name="d_options" id="d-option3" checked={props.state&&props.state.filter_distance&&props.state.filter_distance == "two_day" }  onChange={()=>updateRadioOption("two_day","d_option")}/>  Two-Day Tours
 													</label>
 												</div>
 										</div>
@@ -219,21 +159,21 @@ return (
 											<div  >
 													<label className={className({
 														'filter-button': true,
-  														'active': state&&state.radio&&state.radio.s_option== "review",
+  														'active': props.state&&props.state.sorting_review&&props.state.sorting_review== "desc",
 													})}  >
-													    <input type="radio" name="s_options" id="s-option1" checked={state&&state.radio&&state.radio.s_option == "review" } onChange={()=>updateRadioOption("review","s_option")}  /> Most Reviews
+													    <input type="radio" name="s_options" id="s-option1" checked={props.sorting_review == "desc" } onChange={()=>updateRadioOption("reviewN","s_option")}  /> Most Reviews
 													</label>
 													<label className={className({
 														'filter-button': true,
-  														'active': state&&state.radio&&state.radio.s_option == "distanceN",
+  														'active': props.state&&props.state.sorting_distance&&props.state.sorting_distance == "desc",
 													})} >
-													    <input type="radio" name="s_options" id="s-option3" checked={state&&state.radio&&state.radio.s_option == "distanceN" } onChange={()=>updateRadioOption("distanceN","s_option")} />  Distance Near
+													    <input type="radio" name="s_options" id="s-option3" checked={props.state&&props.state.sorting_distance&&props.state.sorting_distance == "desc" } onChange={()=>updateRadioOption("distanceN","s_option")} />  Distance Near
 													</label>
 													<label className={className({
 														'filter-button': true,
-  														'active': state&&state.radio&&state.radio.s_option == "distanceF",
+  														'active': props.state&&props.state.sorting_distance&&props.state.sorting_distance == "asc",
 													})} >
-													    <input type="radio" name="s_options" id="s-option3" checked={state&&state.radio&&state.radio.s_option == "distanceF" } onChange={()=>updateRadioOption("distanceF","s_option")} />  Distance Far
+													    <input type="radio" name="s_options" id="s-option3" checked={props.state&&props.state.sorting_distance&&props.state.sorting_distance == "asc" } onChange={()=>updateRadioOption("distanceF","s_option")} />  Distance Far
 													</label>
 												</div>
 										</div>
@@ -253,19 +193,19 @@ return (
 								{
 									//"https://gitlab.com/api/v4/projects/18574523/repository/files/"+place.state + "@" + place.place_name.replace("/", "").replace(" ", "_").replace("'","") + "@" + place.id + ".json?ref=master"
 												
-									state.thingsTodos!=null?state.thingsTodos.slice(state.activePage==1?0:(state.activePage-1)*state.itemsCountPerPage,state.activePage==1?state.itemsCountPerPage:state.activePage*state.itemsCountPerPage).map((place)=>{
+									props.data!=null?props.data.map((place)=>{
 										return(
 												<div className="latest_post justify-content-start col-lg-6 col-sm-12 col-md-6">
 													<div className="latest_post_image">
 													<PlaceImage url={
-														"https://gitlab.com/api/v4/projects/18574523/repository/files/test.json?ref=master"
+														"https://gitlab.com/api/v4/projects/18679138/repository/files/"+place.state + "@" + place.place_name.replace(/\s+/g, "_").replace("/", "").replace("'","") + "@" + place.id + ".json?ref=master"
 													} /></div>
 													<div className="latest_post_text post-action">
 															<i className="far fa-heart"></i>
 														</div>	
 													<div className="latest_post_content">
 														<div className="latest_post_title">
-															<a href="#" data-toggle="modal" data-target="#detailModal" onClick={()=>handleShow(place.city,place.id)}>
+															<a href="#" data-toggle="modal" data-target="#detailModal" onClick={()=>handleShow(place.address)}>
 																{place.place_name}
 															</a>
 
@@ -294,14 +234,14 @@ return (
 							<div className="col-lg-12">
 								<div className="pagination float-left">
 									 <Pagination
-							          activePage={state.activePage}
-							          itemsCountPerPage={state.itemsCountPerPage}
-							          totalItemsCount={state.thingsTodos!=null?state.thingsTodos.length:0}
+							          activePage={props.activePage}
+							          itemsCountPerPage={props.itemsCountPerPage}
+							          totalItemsCount={props.totalNumberOfRecords}
 							          pageRangeDisplayed={5}
 							          onChange={handlePageChange.bind(this)}
 							        />
 								</div>
-								<div className="pagination float-right stats-pagination"> {state.activePage} of {state.thingsTodos!=null?Math.ceil(state.thingsTodos.length/state.itemsCountPerPage):0}</div>
+								<div className="pagination float-right stats-pagination"> {props.activePage} of {props.totalNumberOfRecords!=null?Math.ceil(props.totalNumberOfRecords/props.itemsCountPerPage):0}</div>
 							</div>
 						</div>
 
@@ -315,7 +255,7 @@ return (
 									<div id="google_map" className="google_map">
 										<div className="map_container">
 											<div id="map">
-											
+												<SimpleMap lat={props.lat} lng={props.lng} data={props.data}/>
 											</div>
 										</div>
 									</div>

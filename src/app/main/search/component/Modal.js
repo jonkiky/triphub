@@ -75,7 +75,11 @@ return (
 											<div className="row">
 											{data&&data.youtube_ids!=null?data.youtube_ids.split("@").map((id)=>(
   	 <div className="col-6">
-  		<iframe height="300px"  width="100%" src={`https://www.youtube.com/embed/${id}`} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+  		<iframe height="300px"  width="100%" src={`https://www.youtube.com/embed/${id}`} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"
+        mozallowfullscreen="mozallowfullscreen" 
+        msallowfullscreen="msallowfullscreen" 
+        oallowfullscreen="oallowfullscreen" 
+        webkitallowfullscreen="webkitallowfullscreen">
   		</iframe>
   		</div>)):""}
 											</div>
