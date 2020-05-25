@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/triphub/static/css/main.df982891.chunk.css",
-    "main.js": "/triphub/static/js/main.53498231.chunk.js",
-    "main.js.map": "/triphub/static/js/main.53498231.chunk.js.map",
-    "runtime-main.js": "/triphub/static/js/runtime-main.09093eb6.js",
-    "runtime-main.js.map": "/triphub/static/js/runtime-main.09093eb6.js.map",
-    "static/js/2.427213eb.chunk.js": "/triphub/static/js/2.427213eb.chunk.js",
-    "static/js/2.427213eb.chunk.js.map": "/triphub/static/js/2.427213eb.chunk.js.map",
-    "index.html": "/triphub/index.html",
-    "precache-manifest.6381436468d3f84a49fd2ea7e8a682a6.js": "/triphub/precache-manifest.6381436468d3f84a49fd2ea7e8a682a6.js",
-    "service-worker.js": "/triphub/service-worker.js",
-    "static/css/main.df982891.chunk.css.map": "/triphub/static/css/main.df982891.chunk.css.map",
-    "static/js/2.427213eb.chunk.js.LICENSE.txt": "/triphub/static/js/2.427213eb.chunk.js.LICENSE.txt",
-    "static/media/logo.svg": "/triphub/static/media/logo.5d5d9eef.svg",
-    "static/media/not-found-image.jpg": "/triphub/static/media/not-found-image.defc1297.jpg"
+    "main.css": "/static/css/main.d667c1c6.chunk.css",
+    "main.js": "/static/js/main.f3ca6531.chunk.js",
+    "main.js.map": "/static/js/main.f3ca6531.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.3763ffd3.js",
+    "runtime-main.js.map": "/static/js/runtime-main.3763ffd3.js.map",
+    "static/js/2.e0091d18.chunk.js": "/static/js/2.e0091d18.chunk.js",
+    "static/js/2.e0091d18.chunk.js.map": "/static/js/2.e0091d18.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.043a859696f157ab8a293ade09b1cbb9.js": "/precache-manifest.043a859696f157ab8a293ade09b1cbb9.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.d667c1c6.chunk.css.map": "/static/css/main.d667c1c6.chunk.css.map",
+    "static/js/2.e0091d18.chunk.js.LICENSE.txt": "/static/js/2.e0091d18.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/static/media/logo.5d5d9eef.svg",
+    "static/media/not-found-image.jpg": "/static/media/not-found-image.defc1297.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.09093eb6.js",
-    "static/js/2.427213eb.chunk.js",
-    "static/css/main.df982891.chunk.css",
-    "static/js/main.53498231.chunk.js"
+    "static/js/runtime-main.3763ffd3.js",
+    "static/js/2.e0091d18.chunk.js",
+    "static/css/main.d667c1c6.chunk.css",
+    "static/js/main.f3ca6531.chunk.js"
   ]
 }
