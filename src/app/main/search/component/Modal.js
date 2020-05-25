@@ -26,15 +26,10 @@ return (
         <Modal.Body>
          <div className="modal-dialog modal-dialog-centered" role="document">
 				    <div className="modal-content">
-				      <div className="modal-header">
-				      		<div className="detail-title">
-									{data?data.place_name:""} <span className="sub-title">Near | in : {data?data.city:""} , {data?data.state:""} </span>
-							</div>
+				      <div className="modal-body">
 				        <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={handleClose}>
 				          <span aria-hidden="true">&times;</span>
 				        </button>
-				      </div>
-				      <div className="modal-body">
 				      	<div className="detail-pics">
 				        	<div className="modal_post_image"><img src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/06/72/ff/da.jpg" alt=""/></div>
 				        	<div className="modal_post_image"><img src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/06/72/ff/da.jpg" alt=""/></div>
@@ -45,7 +40,7 @@ return (
 				         	<div className="row">
 				         		<div className="col-lg-8">
 							        <div className="detail-desc detail-section">
-							        	<div className="news_post_title"><a href="#">Description</a></div>
+							        	<div className="news_post_title"><a href="#">{data?data.place_name:""} <span className="sub-title">Near | in : {data?data.city:""} , {data?data.state:""} </span></a></div>
 
 							        	<div className="news_post_text">
 							        		<p>	

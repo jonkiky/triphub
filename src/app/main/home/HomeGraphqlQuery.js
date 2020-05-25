@@ -11,10 +11,10 @@ query {
 
 export const HOME_QUERY_CITIES_IN_STATE = gql`
 query getCities($stateId: String!) { 
-cities(query:{state_id: $stateId},limit:6) {
-    _id
+cities(query:{state: $stateId},limit:6) {
 		city
-
+		pictures
+		description
   }
 }
 	`;

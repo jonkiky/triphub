@@ -211,14 +211,16 @@ function SearchController() {
  		setState(c_state);
  	}
 
- 	const { loading, error, data } = useQuery(SEARCH_QUERY,{
+
+ 	let { loading, error, data } = useQuery(SEARCH_QUERY,{
 	    variables: { 
 	    	lat_in: getCurrentPageData()[0],
 	    	lng_in: getCurrentPageData()[1]
 	     },
 	  });
+ 	
 	
-	return  <View 
+	return <View 
       loading={loading} 
       error={error} 
       data={ data ? data.things_to_dos.map(d=>{

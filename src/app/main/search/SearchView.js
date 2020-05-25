@@ -17,12 +17,13 @@ import className from "classnames";
 import SimpleMap from "./component/GoogleMap";
 import CustomModal from "./component/Modal";
 import PlaceImage from "./component/PlaceImage";
-
-
+import { Link} from "react-router-dom";
+import { useHistory } from 'react-router-dom';
+import StarRatings from 'react-star-ratings';
 
 function SearchView(props) {
 
-
+let history = useHistory();
 console.log(props.lat)
 
 const override = css`
@@ -55,11 +56,9 @@ const [state,setState] = useState({
   	c_state["show"]=false;
   	setState(c_state);
   };
-  const handleShow = (addr) => {
-  	let c_state = Object.assign({}, state);
-  	c_state["show"]=true;
-  	c_state["activePageContent"]=props.data.filter(place=> place.address ==addr)
-  	setState(c_state);
+  const handleShow = (lat,lng) => {
+  	let path = `./place?term=`+props.geolocation+`&lat=` + lat +`&lng=`+lng;
+    window.open(path, "_blank") //to open new page
   };
 
 
@@ -70,6 +69,7 @@ function handleSearch(e,search){
 
 function  handlePageChange(pageNumber) {
 	props.handlePageChange(pageNumber)
+	window.scrollTo(0, 0)
  }
 
  const updateRadioOption=(option,cate)=>{
@@ -85,7 +85,9 @@ function  handlePageChange(pageNumber) {
     handleMap(null,null)
   }
 
-
+const updateSave=()=>{
+	console.log(1)
+}
 return (
    <div className="super_container">
 
@@ -107,7 +109,7 @@ return (
 				<div className="col">
 					<div className="header_content d-flex flex-row align-items-center justify-content-start">
 						<div className="header_content_inner d-flex flex-row align-items-end justify-content-start search_header_inner">
-							<div className="logo" ><a href="index.html" style={{color:'black'}}>Travello</a></div>
+							<div className="logo" ><Link to="/" style={{color:'black'}}>Travello</Link></div>
 									<SearchBarView handleSearch={handleSearch}/>
 									<div className="cart d-flex flex-row align-items-end justify-content-start">
 											<div className="intro_icon"><a href="#"><img onClick={()=>handleShow()} src="images/suitcase.svg" alt=""/></a></div>
@@ -124,17 +126,14 @@ return (
 	</header>
 	
 <div className="search_news">
-
 			<div className="row">
 				<div className="col-lg-6" id="list-items">
 					<div className="row thing_to_do_section">
 						<div className="col-lg-12 ">
 							
 							<div className="loader_title">
-								<b>Things TO Do Near: </b>
-							</div>
-							<div className="loader_title">
-								{ props.geolocation} {' '} {props.totalNumberOfRecords}
+								<b>{props.totalNumberOfRecords}  Places To Go: </b>
+								{ props.geolocation} {' '} 
 							</div>
 						</div>
 					</div>
@@ -143,7 +142,6 @@ return (
 								<div className="filter-container">
 									<div className="row">
 										<div className="col-lg-12">
-												<div className="loader_title">Distance:</div>
 												<div >
 													<label className={className({
 														'filter-button': true,
@@ -176,7 +174,6 @@ return (
 									
 									<div className="row">
 										<div className="col-lg-12">
-											<div className="loader_title">Sort By: </div>
 											<div  >
 													<label className={className({
 														'filter-button': true,
@@ -212,9 +209,7 @@ return (
 							<div className="latest_container">
 								<div className="row ">
 								{
-									//"https://gitlab.com/api/v4/projects/18574523/repository/files/"+place.state + "@" + place.place_name.replace("/", "").replace(" ", "_").replace("'","") + "@" + place.id + ".json?ref=master"
-												
-									props.data!=null?props.data.map((place)=>{
+									props.totalNumberOfRecords&&props.data!=null?props.data.map((place)=>{
 										return(
 												<div 
 												onMouseEnter={()=>onMouseEnterContent(place.lat,place.lng)}
@@ -223,22 +218,36 @@ return (
           										className="latest_post justify-content-start col-lg-6 col-sm-12 col-md-6" >
 													<div className="latest_post_image">
 													<PlaceImage url={
-														"https://gitlab.com/api/v4/projects/18679138/repository/files/"+place.state + "@" + place.place_name.replace(/\s+/g, "_").replace("/", "").replace("'","") + "@" + place.id + ".json?ref=master"
-													} /></div>
-													<div className="latest_post_text post-action">
-															<i className="far fa-heart"></i>
-														</div>	
-													<div className="latest_post_content" sty>
+														"https://gitlab.com/api/v4/projects/18927730/repository/files/"+place.state + "@" + place.place_name.replace(/\s+/g, "_").replace("/", "").replace("'","") + "json?ref=master"
+													} />
+													</div>
+													<div className="latest_post_content">
 														<div className="latest_post_title">
-															<a href="#" data-toggle="modal" data-target="#detailModal" onClick={()=>handleShow(place.address)}>
-																{place.place_name}
+															<a href="#" data-toggle="modal" data-target="#detailModal" onClick={()=>handleShow(place.lat,place.lng)}>
+																{place.place_name} 
 															</a>
+											
 
 														</div>
-														<div className="latest_post_text"><p><b>Review:</b>{place.score}  {place.review} google reviews</p></div>
+														<div className="row">
+													        <div className="col-lg-12 place-help-button">
+													                 <a href={place.website_link!=""?place.website_link:"#"} className="btn filter-button help-icon" target="_blank">Website</a>
+													                 <a href={`https://www.google.com/maps/place/${place.place_name}`}  className="btn filter-button help-icon" target="_blank">Directions</a>
+											                         <a href="" className="help-icon btn filter-button "><i class="far fa-heart"></i></a>
+													        </div>
+													    </div>
+														<div className="latest_post_text">
+															 <StarRatings
+															        rating={place.score}
+															        starDimension="20px"
+															        starSpacing="2px"
+															        starRatedColor="#FAD02C"
+															      />
+
+															&nbsp; {place.review} google reviews</div>
 														<div className="latest_post_text"><p>{place.desc =="" ? place.shortDesc : place.desc}</p></div>
-														<div className="latest_post_text"><p><b>Address:</b>{place.address}</p></div>
-														<div className="latest_post_text"><p><b>Distance:</b>{place.distance}+ miles</p></div>
+														<div className="latest_post_text"><p><b>Address: </b>{place.address}</p></div>
+														<div className="latest_post_text"><p><b>Distance: </b>{place.distance}+ miles</p></div>
 														
 													</div>
 												</div>
@@ -269,6 +278,15 @@ return (
 								<div className="pagination float-right stats-pagination"> {props.activePage} of {props.totalNumberOfRecords!=null?Math.ceil(props.totalNumberOfRecords/props.itemsCountPerPage):0}</div>
 							</div>
 						</div>
+						<footer class="footer">
+							<div class="col text-center">
+								Feedback
+							</div>
+							<div class="col text-center">
+							Copyright &copy;
+							All rights reserved | This template is made with<i class="fas fa-heart"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+							</div>
+						</footer>
 
 
 

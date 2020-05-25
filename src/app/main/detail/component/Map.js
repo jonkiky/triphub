@@ -1,12 +1,12 @@
 import React from 'react';
 import GoogleMap from 'google-map-react';
-import PLACE_PIN from './PlacePin'
+import PLACE_PIN from './SimplePlacePin'
 
 function SimpleMap(props){
 
 return (
       // Important! Always set the container height explicitly
-      <div style={{ height: '90vh', width: '50%' }}>
+      <div style={{ height: '50vh', width: '100%' }}>
         <GoogleMap
           bootstrapURLKeys={'AIzaSyD4GazFJE0ziwpJEjVMT4bWYtl-YClo1Yk'}
           center={{
@@ -15,20 +15,13 @@ return (
     }}
           zoom={11}
         >
-        {
-          props.data&&props.data.map((d)=>{
-            return (
                <PLACE_PIN
-                lat={d.lat}
-                lng={d.lng}
-                text={d.place_name}
-                key={d.lat+d.lng}
-                handleMapHover={props.handleMapHover}
-                show = {d.lat==props.target_lat && d.lng==props.target_lng}
+                lat={props.data.lat}
+                lng={props.data.lng}
+                text={props.data.place_name}
+                key={props.data.lat+props.data.lng}
+                show ={false}
               />
-                  )
-          })
-        }
         </GoogleMap>
       </div>
     );
