@@ -18,6 +18,10 @@ const override = css`
 	
 	let history = useHistory();
  	const [searchTerm,setSearchTerm] = useState("");
+
+ 	if(searchTerm=="" && props.address!=""){
+ 		setSearchTerm(props.address);
+ 	}
  	
 	const updateSearch = (event) => {
 		setSearchTerm(event.target.value);

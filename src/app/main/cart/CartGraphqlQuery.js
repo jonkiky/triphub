@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
-export const SEARCH_QUERY = gql`
-query getThingsTodos($lat_in: [Float]!, $lng_in: [Float]!) {
-  things_to_dos(query: {lat_in: $lat_in, lng_in: $lng_in}) {
+export const QUERY = gql`
+query getThingsTodos($ids: [ObjectId]!) {
+  things_to_dos(query: {_id_in: $ids}) {
     place_name
     state
     city
@@ -27,11 +27,3 @@ query getThingsTodos($lat_in: [Float]!, $lng_in: [Float]!) {
   }
   }
 	`;
-
-// export const SEARCH_QUERY = gql`
-// query {
-//   cities(limit: 6){
-//     city
-//   }
-//   }
-//     `;

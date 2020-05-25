@@ -6,13 +6,15 @@ import { useQuery } from "@apollo/react-hooks";
 import View from './SearchView';
 import axios from 'axios';
 import { Base64 } from 'js-base64';
+import { useDispatch } from 'react-redux';
+import { initCart} from '../cart/redux/CartAction'
 
 
 function SearchController() {
 
 	let query = new URLSearchParams(useLocation().search);
-
-
+	const dispatch = useDispatch();
+	dispatch(initCart());
 
 	// use new york city as default
 	const default_city="New york city"

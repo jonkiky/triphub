@@ -15,17 +15,24 @@ import SearchBarView  from "../../../@framework/SearchBar/SearchBarView";
 import Pagination from "react-js-pagination";
 import className from "classnames";
 import SimpleMap from "./component/GoogleMap";
-import CustomModal from "./component/Modal";
+import CartModal from "../cart/CartController";
 import PlaceImage from "./component/PlaceImage";
 import { Link} from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteFromCartAction, addToCart} from '../cart/redux/CartAction'
+import {OverlayTrigger,Tooltip} from 'react-bootstrap';
+
 
 function SearchView(props) {
 
-let history = useHistory();
-console.log(props.lat)
+const history = useHistory();
+const dispatch = useDispatch();
 
+const cart = useSelector((state) => state.cart.places);
+
+console.log(cart);
 const override = css`
   display: block;
   width:100%;
@@ -56,13 +63,37 @@ const [state,setState] = useState({
   	c_state["show"]=false;
   	setState(c_state);
   };
-  const handleShow = (lat,lng) => {
-  	let path = `./place?term=`+props.geolocation+`&lat=` + lat +`&lng=`+lng;
-    window.open(path, "_blank") //to open new page
-  };
 
+ const searchImgOnGoogle=(place)=>{
+ 	let url =  "https://www.google.com/search?as_st=y&tbm=isch&as_q="+place+"&as_epq=&as_oq=&as_eq=&imgsz=&imgar=&imgc=&imgcolor=&imgtype=&cr=&as_sitesearch=&safe=images&as_filetype=&as_rights=";
+ 	window.open(url,"_blank")
+ }
+ // const handleShow = (lat,lng) => {
+ //  	let path = `./place?term=`+props.geolocation+`&lat=` + lat +`&lng=`+lng;
+ //    window.open(path, "_blank") //to open new page
+ //  };
 
-function handleSearch(e,search){
+const openCart=()=>{
+	let c_state = Object.assign({}, state);
+  	c_state["show"]=true;
+  	setState(c_state);
+}
+
+const handleCartChange=(id)=>{
+	if(cart.includes(id)){
+		// reomove from cart
+		dispatch(deleteFromCartAction({
+			"places":[id]
+		}));
+	}else{
+		// add into cart
+		dispatch(addToCart({
+			"places":[id]
+		}));
+	}
+}
+
+const handleSearch=(e,search)=>	{
 	props.handleSearch(e,search);
 }
 
@@ -91,7 +122,7 @@ const updateSave=()=>{
 return (
    <div className="super_container">
 
-   <CustomModal handleClose={handleClose} show={state.show} data={{...state["activePageContent"]}}/>
+   <CartModal handleClose={handleClose} show={state.show}  searchImgOnGoogle={searchImgOnGoogle} handleCartChange={handleCartChange}/>
 
     <div className="sweet-loading">
         <BounceLoader
@@ -112,9 +143,9 @@ return (
 							<div className="logo" ><Link to="/" style={{color:'black'}}>Travello</Link></div>
 									<SearchBarView handleSearch={handleSearch}/>
 									<div className="cart d-flex flex-row align-items-end justify-content-start">
-											<div className="intro_icon"><a href="#"><img onClick={()=>handleShow()} src="images/suitcase.svg" alt=""/></a></div>
+											<div className="intro_icon"><a href="#"><img onClick={()=>openCart()} src="images/suitcase.svg" alt=""/></a></div>
 											<div className="intro_content">
-												0
+												{cart.length}
 											</div>
 										</div>
 									</div>
@@ -216,14 +247,29 @@ return (
          										onMouseLeave={onMouseLeaveContent}
           										style={place.lat==state.map_lat&&place.lng==state.map_lng? with_grey_border:null} 
           										className="latest_post justify-content-start col-lg-6 col-sm-12 col-md-6" >
-													<div className="latest_post_image">
-													<PlaceImage url={
-														"https://gitlab.com/api/v4/projects/18927730/repository/files/"+place.state + "@" + place.place_name.replace(/\s+/g, "_").replace("/", "").replace("'","") + "json?ref=master"
-													} />
+													<div className="latest_post_image"> 
+											                         <OverlayTrigger
+										                              key="Like_tool_tip"
+										                              placement="bottom"
+										                              overlay={
+										                                <Tooltip id={`tooltip-bottom`}>
+										                                 Click the picture to find more images on google
+										                                </Tooltip>
+										                              }
+										                            >
+										                            
+										                            <a href="#" onClick={()=>searchImgOnGoogle(place.place_name)}  >
+																		<PlaceImage url={
+																			"https://gitlab.com/api/v4/projects/18927730/repository/files/"+place.state + "@" + place.place_name.replace(/\s+/g, "_").replace("/", "").replace("'","") + "json?ref=master"
+																		} />										                         
+																	</a>
+										                            </OverlayTrigger>
+													
+
 													</div>
 													<div className="latest_post_content">
 														<div className="latest_post_title">
-															<a href="#" data-toggle="modal" data-target="#detailModal" onClick={()=>handleShow(place.lat,place.lng)}>
+															<a href="#">
 																{place.place_name} 
 															</a>
 											
@@ -233,8 +279,23 @@ return (
 													        <div className="col-lg-12 place-help-button">
 													                 <a href={place.website_link!=""?place.website_link:"#"} className="btn filter-button help-icon" target="_blank">Website</a>
 													                 <a href={`https://www.google.com/maps/place/${place.place_name}`}  className="btn filter-button help-icon" target="_blank">Directions</a>
-											                         <a href="" className="help-icon btn filter-button "><i class="far fa-heart"></i></a>
-													        </div>
+											                        
+											                         <OverlayTrigger
+										                              key="Like_tool_tip"
+										                              placement="right"
+										                              overlay={
+										                                <Tooltip id={`tooltip-right`}>
+										                                 {cart.includes(place._id)? "UnLike" :"Like"}	
+										                                </Tooltip>
+										                              }
+										                            >
+										                            
+										                            <a href="#" onClick={()=>handleCartChange(place._id)}  className={cart.includes(place._id)?"heart btn filter-button":"help-icon btn filter-button"}>
+											                         	{cart.includes(place._id)?<i class="fas fa-heart"></i>:<i class="far fa-heart"></i>}											                         </a>
+							
+										                            </OverlayTrigger>
+
+                             						        </div>
 													    </div>
 														<div className="latest_post_text">
 															 <StarRatings
@@ -250,6 +311,156 @@ return (
 														<div className="latest_post_text"><p><b>Distance: </b>{place.distance}+ miles</p></div>
 														
 													</div>
+													 <div className="row">
+											          <div className="col-lg-12">
+											                    <div className="news_post_text">
+											                      <div className="icons">
+											                       {place.facebook_link!=""?(
+											                         <OverlayTrigger
+											                              key="facebook_tool_tip"
+											                              placement="top"
+											                              overlay={
+											                                <Tooltip id={`tooltip-top`}>
+											                                 Facebook
+											                                </Tooltip>
+											                              }
+											                            >
+											                             <a href={place.facebook_link} target="_blank"><i className="fab fa-facebook-square"></i></a>
+											                            </OverlayTrigger>):''}
+
+											                         {place.instagram_link!=""?(
+											                         <OverlayTrigger
+											                              key="instagram_tool_tip"
+											                              placement="top"
+											                              overlay={
+											                                <Tooltip id={`tooltip-top`}>
+											                                 Instagram
+											                                </Tooltip>
+											                              }
+											                            >
+											                            <a href={place.instagram_link} target="_blank"><i className="fab fa-instagram-square"></i></a>
+											                            </OverlayTrigger>):''}
+
+
+											                          {place.twitter_link!=""?(
+											                         <OverlayTrigger
+											                              key="twitter_tool_tip"
+											                              placement="top"
+											                              overlay={
+											                                <Tooltip id={`tooltip-top`}>
+											                                 Twitter
+											                                </Tooltip>
+											                              }
+											                            >
+											                          <a href={place.twitter_link} target="_blank"><i className="fab fa-twitter-square"></i></a>
+											                            </OverlayTrigger>):''}
+
+
+
+											                          {place.pinterest_link!=""?(
+											                         <OverlayTrigger
+											                              key="pinterest_tool_tip"
+											                              placement="top"
+											                              overlay={
+											                                <Tooltip id={`tooltip-top`}>
+											                                 Pinterest
+											                                </Tooltip>
+											                              }
+											                            >
+											                        <a href={place.pinterest_link} target="_blank"><i className="fab fa-pinterest-square"></i></a>
+											                            </OverlayTrigger>):''}
+
+
+
+
+											                          {place.youtube_link!=""?(
+											                         <OverlayTrigger
+											                              key="Youtube_tool_tip"
+											                              placement="top"
+											                              overlay={
+											                                <Tooltip id={`tooltip-top`}>
+											                                 Youtube
+											                                </Tooltip>
+											                              }
+											                            >
+											                     <a href={place.youtube_link} target="_blank"><i className="fab fa-youtube-square"></i></a>
+											                            </OverlayTrigger>):''}
+
+
+
+											                      
+											                         <OverlayTrigger
+											                              key="hotel_tool_tip"
+											                              placement="top"
+											                              overlay={
+											                                <Tooltip id={`tooltip-top`}>
+											                                 Hotel
+											                                </Tooltip>
+											                              }
+											                            >
+											                              <a href={`https://www.google.com/travel/hotels?destination=${place.place_name}`} target="_blank"><i className="fas fa-shower"></i></a>
+											                     
+											                            </OverlayTrigger>
+
+											                            <OverlayTrigger
+											                              key="yelp_tool_tip"
+											                              placement="top"
+											                              overlay={
+											                                <Tooltip id={`tooltip-top`}>
+											                                 Yelp
+											                                </Tooltip>
+											                              }
+											                            >
+											                                 <a  href={`https://www.yelp.com/search?find_desc=food&find_loc=${place.place_name}`} target="_blank"><i className="fab fa-yelp"></i></a>
+											                    
+											                            </OverlayTrigger>
+
+
+											                            <OverlayTrigger
+											                              key="parking_tool_tip"
+											                              placement="top"
+											                              overlay={
+											                                <Tooltip id={`tooltip-top`}>
+											                                 Parking
+											                                </Tooltip>
+											                              }
+											                            >
+											                             <a href={`https://www.parkme.com/map?q=${place.place_name} , ${place.state}`} target="_blank"><i className="fas fa-parking"></i></a>
+											                        
+											                            </OverlayTrigger>
+
+
+											                            <OverlayTrigger
+											                              key="google_tool_tip"
+											                              placement="top"
+											                              overlay={
+											                                <Tooltip id={`tooltip-top`}>
+											                                 Google Search
+											                                </Tooltip>
+											                              }
+											                            >
+											                               <a  href={`https://www.google.com/search?q=${place.place_name}`} target="_blank"><i className="fas fa-camera-retro"></i></a>
+											                        
+											                            </OverlayTrigger>
+
+
+											                            <OverlayTrigger
+											                              key="TripAdvisor_tool_tip"
+											                              placement="top"
+											                              overlay={
+											                                <Tooltip id={`tooltip-top`}>
+											                                 TripAdvisor
+											                                </Tooltip>
+											                              }
+											                            >
+											                                <a  title="Hooray!" href={`https://www.tripadvisor.com/Search?q=${place.place_name}`} target="_blank"><i className="fab fa-tripadvisor"></i></a>
+											                      
+											                            </OverlayTrigger>
+
+											                       </div>
+											                    </div>
+											                  </div>
+											      </div>
 												</div>
 
 											)

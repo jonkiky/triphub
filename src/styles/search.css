@@ -300,11 +300,36 @@
     background: #efefef !important;
     color: black !important;
     cursor: pointer !important;
-
 }
 
-.heart{
-    color: red !important;
+.place-help-button .heart{
+    border: 1px solid #efefef;
+    background: #efefef;
+    cursor: pointer !important;
+    color: rgba(255, 0, 0, 0.7) !important;
+}
+
+.place-help-button .heart:hover{
+    border: 1px solid #efefef !important;
+    background: #efefef !important;
+    cursor: pointer !important;
+    color: rgba(255, 0, 0, 0.7) !important;
+}
+
+.icons a {
+    margin: 0 5px;
+    background: #efefef;
+    font-size: 20px;
+    color: #333;
+}
+.modal-dialog{
+    pointer-events: auto;
+}
+
+.close-btn{
+    background: #efefef !important;
+    width: 50px !important;
+    border: 1px solid #ccc !important;
 }
 input[type=radio] {
     position: absolute;
