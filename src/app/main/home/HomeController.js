@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { HOME_QUERY ,HOME_QUERY_CITIES_IN_STATE} from "./HomeGraphqlQuery";
 import { geolocated } from "react-geolocated";
-import { DestinationPointBasedOnDistanceBearingStartPoint,customGeocode} from "../../utils/geoUtils";
+import { DestinationPointBasedOnDistanceBearingStartPoint,customGeocode,StateAbbreviationToFullName} from "../../utils";
 import View from "./HomeView"
 
 
@@ -13,7 +13,7 @@ function HomeController(props) {
   const [address, setAddress] = useState(null);
   const Geocode = customGeocode();
 
-  let graphql_query =HOME_QUERY;
+  let graphql_query =HOME_QUERY_CITIES_IN_STATE;
   
   // Get address from latitude & longitude.
   if(props.isGeolocationAvailable 
@@ -32,9 +32,6 @@ function HomeController(props) {
               state:stateInfo
             });
           }
-          // error => {
-          //   console.error(error);
-          // }
     );
   }
 
@@ -46,10 +43,9 @@ function HomeController(props) {
   }
 
 
-
   // query the backend 
    const { loading, error, data } = useQuery(graphql_query,{
-    variables: { stateId: (address!==null && address.state) ?address.state:null },
+    variables: { stateId: (address!==null && address.state) ?StateAbbreviationToFullName(address.state):null },
   });
 
   

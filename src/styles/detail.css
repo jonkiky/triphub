@@ -1,0 +1,69 @@
+
+.pics {
+	width: 20%;
+}
+.pics img
+{
+	width: 100%;
+	height: 100%;
+}
+
+.pic_source
+{
+    width: 20%;
+    color: #000;
+    font-size: 15px; 
+    font-weight: 600;
+    margin-top: -30px;
+    opacity: 0.8;
+    background: #fff;
+}
+
+
+.title
+{
+	font-family: 'Oswald', sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+    color: #181818;
+}
+
+.sub-title
+{
+	font-family: 'Oswald', sans-serif;
+    font-size: 25px;
+    font-weight: 400;
+    color: rgba(24,24,24,1);
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
+}
+
+.padding-left-20
+{
+	padding-left: 20px;
+}
+
+
+.icon
+{
+	 color: #181818;
+}
+
+.detail_google_map{
+    position: relative;
+}
+
+.detail_youtube iframe {
+    padding-right: 20px;
+}
+
+.detail_youtube:last-child iframe {
+    padding-right: 0px;
+}
+
+
+
+

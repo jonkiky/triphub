@@ -97,7 +97,7 @@
 	background: white;
 	border: 1px solid #212529;
 	color:#212529;
-    border-radius: 5px;
+    border-radius: 0px;
     font-size: 15px;
     line-height:1;
     display: inline-block;
@@ -179,29 +179,15 @@
     margin: auto;
 }
 
-.post-action{
-	position: absolute;
-    top: 25px;
-    right: 40px;
-    font-size: 18px;
-    line-height: 30px;
-    color: black;
-    background: white;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    text-align: center;
-}
-.post-action:hover{
-	color: red;
-}
 .cart{
 	margin-right: 60px;
 }
 .footer{
 	padding-top: 30px;
 }
-
+.latest_post_image img{
+    width: 100%;
+}
 
 .modal-dialog {
   width: 100%;
@@ -303,8 +289,48 @@
 	float: left;
 }
 
+.place-help-button .help-icon{
+    border: 1px solid #efefef;
+    background: #efefef;
+    color: black !important;
+    cursor: pointer !important;
+}
+.place-help-button .help-icon:hover{
+    border: 1px solid #efefef !important;
+    background: #efefef !important;
+    color: black !important;
+    cursor: pointer !important;
+}
 
+.place-help-button .heart{
+    border: 1px solid #efefef;
+    background: #efefef;
+    cursor: pointer !important;
+    color: rgba(255, 0, 0, 0.7) !important;
+}
 
+.place-help-button .heart:hover{
+    border: 1px solid #efefef !important;
+    background: #efefef !important;
+    cursor: pointer !important;
+    color: rgba(255, 0, 0, 0.7) !important;
+}
+
+.icons a {
+    margin: 0 5px;
+    background: #efefef;
+    font-size: 20px;
+    color: #333;
+}
+.modal-dialog{
+    pointer-events: auto;
+}
+
+.close-btn{
+    background: #efefef !important;
+    width: 50px !important;
+    border: 1px solid #ccc !important;
+}
 input[type=radio] {
     position: absolute;
     clip: rect(0,0,0,0);

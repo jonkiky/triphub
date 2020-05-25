@@ -3,7 +3,7 @@ import about from './about/AboutView';
 import error404 from './errors/404';
 import search from './search/SearchController';
 import home from './home/HomeController';
-
+import place from './detail/DetailController'
 
 const Config = {
 	settings: {
@@ -17,6 +17,10 @@ const Config = {
 		{
 			path: '/home',
 			component: home
+		},
+		{
+			path: '/place',
+			component: place
 		},
 		{
 			path: '/errors/404',

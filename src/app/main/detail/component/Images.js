@@ -7,6 +7,7 @@ import Img from '../../../assets/images/not-found-image.jpg'
 function PlaceImage(props) {
 
 const	[img,setImg] = useState("")
+const [source,setSource] = useState("")
 
 useEffect(() => {
       try {
@@ -19,17 +20,28 @@ useEffect(() => {
         },
         }).then(res => {
         const result = res.data;
-        setImg(JSON.parse(Base64.decode(result.content))['img'][0])
+        setImg(JSON.parse(Base64.decode(result.content))['img'].slice(0,5))
+        setSource(JSON.parse(Base64.decode(result.content))['source'].slice(0,5))
       });
       } catch (error) {
       	console.log("error")
       }
   },[props.url]);
+  
+let img_html ="";
+let source_data="";
 
-return img == ""?<img src={Img}/>:<div className="content" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(img)}}></div>
-
+if(img!= ""){
+  img_html = img.map((pic)=>(<div className="pics" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(pic)}}></div>))
+}
+if(source!=""){
+  source_data = source.map((source)=>{
+  return <div className="pic_source" >{source}</div>
+})
 }
 
+return img == ""||source==""?<img src={Img}/>: <>{img_html}{source_data}</>;
+}
 
 export default PlaceImage;
    
