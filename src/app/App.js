@@ -18,7 +18,7 @@ const App = () => {
 		>
 			<Router history={history}>
 					<Layout />
-			</Router>
+				</Router>
 		</AppContext.Provider>
 	</ApolloProvider>
 	)
