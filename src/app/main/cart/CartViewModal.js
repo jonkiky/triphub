@@ -13,12 +13,12 @@ function CartModal(props) {
   	props.handleClose();
   };
 
-const handleCartChange=(id)=>{
-	props.handleCartChange(id);
+const handleCartChange=(event,id)=>{
+	props.handleCartChange(event,id);
 }
 
- const searchImgOnGoogle=(place)=>{
- 	props.searchImgOnGoogle(place);
+ const searchImgOnGoogle=(event,place)=>{
+ 	props.searchImgOnGoogle(event,place);
  }
  
 
@@ -60,7 +60,7 @@ return (
 													                              }
 													                            >
 													                            
-													                            <a href="#" onClick={()=>searchImgOnGoogle(place.place_name)}  >
+													                            <a href="#" onClick={(event)=>searchImgOnGoogle(event,place.place_name)}  >
 																					<PlaceImage url={
 																						"https://gitlab.com/api/v4/projects/18927730/repository/files/"+place.state + "@" + place.place_name.replace(/\s+/g, "_").replace("/", "").replace("'","") + "json?ref=master"
 																					} />										                         
@@ -81,7 +81,7 @@ return (
 																        <div className="col-lg-12 place-help-button">
 																                 <a href={place.website_link!=""?place.website_link:"#"} className="btn filter-button help-icon" target="_blank">Website</a>
 																                 <a href={`https://www.google.com/maps/place/${place.place_name}`}  className="btn filter-button help-icon" target="_blank">Directions</a>
-													                            <a href="#" onClick={()=>handleCartChange(place._id)}  className="heart btn filter-button">
+													                            <a href="#" onClick={(event)=>handleCartChange(event,place._id)}  className="heart btn filter-button">
 														                         	<i class="fas fa-heart"></i> 
 														                        </a>
 			                             						        </div>

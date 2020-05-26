@@ -64,7 +64,8 @@ const [state,setState] = useState({
   	setState(c_state);
   };
 
- const searchImgOnGoogle=(place)=>{
+ const searchImgOnGoogle=(event,place)=>{
+ 	event.preventDefault();
  	let url =  "https://www.google.com/search?as_st=y&tbm=isch&as_q="+place+"&as_epq=&as_oq=&as_eq=&imgsz=&imgar=&imgc=&imgcolor=&imgtype=&cr=&as_sitesearch=&safe=images&as_filetype=&as_rights=";
  	window.open(url,"_blank")
  }
@@ -73,13 +74,15 @@ const [state,setState] = useState({
  //    window.open(path, "_blank") //to open new page
  //  };
 
-const openCart=()=>{
+const openCart=(event)=>{
+	event.preventDefault();
 	let c_state = Object.assign({}, state);
   	c_state["show"]=true;
   	setState(c_state);
 }
 
-const handleCartChange=(id)=>{
+const handleCartChange=(event,id)=>{
+	event.preventDefault();
 	if(cart.includes(id)){
 		// reomove from cart
 		dispatch(deleteFromCartAction({
@@ -116,9 +119,6 @@ function  handlePageChange(pageNumber) {
     handleMap(null,null)
   }
 
-const updateSave=()=>{
-	console.log(1)
-}
 return (
    <div className="super_container">
 
@@ -143,7 +143,7 @@ return (
 							<div className="logo" ><Link to="/" style={{color:'black'}}>Travello</Link></div>
 									<SearchBarView handleSearch={handleSearch}/>
 									<div className="cart d-flex flex-row align-items-end justify-content-start">
-											<div className="intro_icon"><a href="#"><img onClick={()=>openCart()} src="images/suitcase.svg" alt=""/></a></div>
+											<div className="intro_icon"><a href=""><img onClick={(event)=>openCart(event)} src="images/suitcase.svg" alt=""/></a></div>
 											<div className="intro_content">
 												{cart.length}
 											</div>
@@ -258,7 +258,7 @@ return (
 										                              }
 										                            >
 										                            
-										                            <a href="#" onClick={()=>searchImgOnGoogle(place.place_name)}  >
+										                            <a href="" onClick={(event)=>searchImgOnGoogle(event,place.place_name)}  >
 																		<PlaceImage url={
 																			"https://gitlab.com/api/v4/projects/18927730/repository/files/"+place.state + "@" + place.place_name.replace(/\s+/g, "_").replace("/", "").replace("'","") + "json?ref=master"
 																		} />										                         
@@ -269,7 +269,7 @@ return (
 													</div>
 													<div className="latest_post_content">
 														<div className="latest_post_title">
-															<a href="#">
+															<a href="">
 																{place.place_name} 
 															</a>
 											
@@ -290,7 +290,7 @@ return (
 										                              }
 										                            >
 										                            
-										                            <a href="#" onClick={()=>handleCartChange(place._id)}  className={cart.includes(place._id)?"heart btn filter-button":"help-icon btn filter-button"}>
+										                            <a href="" onClick={(event)=>handleCartChange(event,place._id)}  className={cart.includes(place._id)?"heart btn filter-button":"help-icon btn filter-button"}>
 											                         	{cart.includes(place._id)?<i class="fas fa-heart"></i>:<i class="far fa-heart"></i>}											                         </a>
 							
 										                            </OverlayTrigger>
