@@ -45,7 +45,7 @@ function HomeController(props) {
 
   // query the backend 
    const { loading, error, data } = useQuery(graphql_query,{
-    variables: { stateId: (address!==null && address.state) ?StateAbbreviationToFullName(address.state):null },
+    variables: { stateId: (address!==null && address.state) ?StateAbbreviationToFullName(address.state):"District_Of_Columbia" },
   });
 
   
