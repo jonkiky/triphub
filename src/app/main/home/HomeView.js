@@ -7,6 +7,11 @@ import Skeleton from 'react-loading-skeleton';
 import '../../../styles/main_styles.css';
 import '../../../styles/responsive.css';
 import '../../../styles/home_styles.css';
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+// If you want to use the provided css
+import 'react-google-places-autocomplete/dist/index.min.css';
+ 
+
 
 function HomeView(props) {
 
@@ -29,7 +34,7 @@ const override = css`
 	};
 
 
-	const routeChange=()=> {
+	const routeChange=(searchTerm)=> {
     let path = `/search?term=` + searchTerm;
     history.push(path);
   }
@@ -71,6 +76,7 @@ const override = css`
 
 						</div>
 						<div className="home-bg-author">Photo by Jakob Owens on Unsplash</div>
+
 					</div>
 		</div>
 	</div>
@@ -85,7 +91,14 @@ const override = css`
 						<div className="home_search_content">
 							<form action="search" className="home_search_form" id="home_search_form">
 								<div className="d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start">
-									<span className="search_input_word">Near</span><input onChange={(event)=>updateSearch(event)} value= {searchTerm}  type="text" className="search_input search_input_80" required="required"/>
+									<span className="search_input_word">Near</span>
+									<GooglePlacesAutocomplete
+								      onSelect={(addr)=>routeChange(addr.description)}
+								      initialValue={searchTerm} 
+								      inputClassName={"search_input search_input_80" }
+								      required
+								      placeholder={""}
+								    />
 									<button className="home_search_button"  disabled={searchTerm==null||searchTerm==""} onClick={()=>routeChange()}>search</button>
 								</div>
 							</form>

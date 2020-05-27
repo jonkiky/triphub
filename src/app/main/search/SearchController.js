@@ -37,7 +37,7 @@ function SearchController() {
  useEffect(() => {
 
  	// check search term  
-	const search_term =  query.get("term")
+	let search_term =  query.get("term")
 	if(search_term==""||search_term==null){
 		search_term = default_city;
 	}
@@ -210,7 +210,7 @@ function SearchController() {
 
 
 
- 	function handleSearch(e,addr){
+ 	function handleSearch(addr){
  		getSearchTermLatAndLng(addr,getAllPlaceLatAndLng);
  	}
 

@@ -96,8 +96,8 @@ const handleCartChange=(event,id)=>{
 	}
 }
 
-const handleSearch=(e,search)=>	{
-	props.handleSearch(e,search);
+const handleSearch=(search)=>	{
+	props.handleSearch(search);
 }
 
 
