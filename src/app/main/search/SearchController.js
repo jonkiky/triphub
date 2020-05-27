@@ -81,9 +81,9 @@ function SearchController() {
  }
 
 
- function getCurrentPageData(){
+ function getCurrentPageData(places,skip){
 
- 	if(state.place_all_lat_lng_review === null){
+ 	if(places === null){
  		return []
  	}else{
  		// filter  distance
@@ -91,31 +91,31 @@ function SearchController() {
 
  		switch(state.filter_distance) {
 			  case "5_miles":
-			   distanced_data=state.place_all_lat_lng_review.filter((d)=>d.distance<15)
+			   distanced_data=places.filter((d)=>d.distance<10)
 			    break;
 			  case "half_day":
-			     distanced_data=state.place_all_lat_lng_review.filter((d)=>d.distance>=15&&d.distance<40)
+			     distanced_data=places.filter((d)=>d.distance>=10&&d.distance<40)
 			    break;
 			  case "one_day":
-			     distanced_data=state.place_all_lat_lng_review.filter((d)=>d.distance>45&&d.distance<120)
+			     distanced_data=places.filter((d)=>d.distance>45&&d.distance<120)
 			    break;
 			  case "two_day":
-			     distanced_data=state.place_all_lat_lng_review.filter((d)=>d.distance>120&&d.distance<220)
+			     distanced_data=places.filter((d)=>d.distance>120&&d.distance<220)
 			    break;
 			   default:
-			   	distanced_data=state.place_all_lat_lng_review.filter((d)=>d.distance<15)
+			   	distanced_data=places.filter((d)=>d.distance<15)
 
 	}	
 
 		// sorting
 		if(state.sorting_review=="desc"){
 				distanced_data.sort(function(a, b) {
-						  return a.review - b.review;
+						  return b.review - a.review;
 						});
-		}
+		} 
 		if(state.sorting_review=="asc"){
 				distanced_data.sort(function(a, b) {
-						  return b.review - a.review;
+						  return a.review - b.review;
 						});
 		}
 
@@ -130,15 +130,20 @@ function SearchController() {
 						});
 		}
 		
-		// get current page's data's lat and lng 
-		let start_index =(state.activePage-1)*state.itemsCountPerPage;
-		let end_index =(state.activePage)*state.itemsCountPerPage;
-		if(end_index>distanced_data.length){
-			end_index=distanced_data.length;
+		if(skip){
+			// get current page's data's lat and lng 
+			let start_index =(state.activePage-1)*state.itemsCountPerPage;
+			let end_index =(state.activePage)*state.itemsCountPerPage;
+			if(end_index>distanced_data.length){
+				end_index=distanced_data.length;
+			}
+			const currentPageData =distanced_data.slice(start_index,end_index);
+			return [currentPageData.map(d=>d.id),distanced_data.length,currentPageData]
+		}else{
+			const currentPageData =distanced_data;
+			return [currentPageData.map(d=>d.id),distanced_data.length,currentPageData]
 		}
-		const currentPageData =distanced_data.slice(start_index,end_index);
-
-		return [currentPageData.map(d=>d.lat),currentPageData.map(d=>d.lng),distanced_data.length]
+		
  	}
  }
 
@@ -159,7 +164,7 @@ function SearchController() {
 
  function getAllPlaceLatAndLng(lat,lng,addr){
  		try {
-			        axios.get("https://gitlab.com/api/v4/projects/18679138/repository/files/thing_to_do%2Fplace_lat_lng.json?ref=master",{
+			        axios.get("https://gitlab.com/api/v4/projects/19020220/repository/files/place_lat_lng_review_id.json?ref=master",{
 			           headers: {
 			          'Access-Control-Allow-Origin' : '*',
 			          'Access-Control-Allow-Methods' : 'GET',
@@ -182,8 +187,10 @@ function SearchController() {
 				        // add attribute distance
 				        const distance_filtered_data = filtered_data.map((d)=>{
 				        	return {
+				        		id: d.id,
 				        		lat: d.lat,
 				        		lng: d.lng,
+				        		review: d.review,
 				        		distance:Math.round(haversineDistance([lng,lat],[d.lng,d.lat]))
 				        	}
 				        })
@@ -216,8 +223,7 @@ function SearchController() {
 
  	let { loading, error, data } = useQuery(SEARCH_QUERY,{
 	    variables: { 
-	    	lat_in: getCurrentPageData()[0],
-	    	lng_in: getCurrentPageData()[1]
+	    	id_in: getCurrentPageData(state.place_all_lat_lng_review)[0],
 	     },
 	  });
  	
@@ -225,13 +231,12 @@ function SearchController() {
 	return <View 
       loading={loading} 
       error={error} 
-      data={ data ? data.things_to_dos.map(d=>{
+      data={ data ? getCurrentPageData(data.things_to_dos.map(d=>{
  		d["distance"] = Math.round(haversineDistance([state.lng,state.lat],[d.lng,d.lat]));
  		return d;
- 	}):data
-  }		
+ 	}),true)[2]:data}		
   	  state={state}
-  	  totalNumberOfRecords ={getCurrentPageData()[2]}
+  	  totalNumberOfRecords ={getCurrentPageData(state.place_all_lat_lng_review)[1]}
   	  activePage ={state.activePage}
   	  itemsCountPerPage={state.itemsCountPerPage}
   	  sorting_review={state.sorting_review}

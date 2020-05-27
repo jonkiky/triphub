@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const SEARCH_QUERY = gql`
-query getThingsTodos($lat_in: [Float]!, $lng_in: [Float]!) {
-  things_to_dos(query: {lat_in: $lat_in, lng_in: $lng_in}) {
+query getThingsTodos($id_in: [String]!) {
+  things_to_dos(query: {id_in: $id_in}) {
     place_name
     state
     city

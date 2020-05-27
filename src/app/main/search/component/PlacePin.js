@@ -41,8 +41,6 @@ const text_style={
 
   const _onMouseEnterContent = (/*e*/) => {
     props.$onMouseAllow(false); 
-    console.log(0);
-    console.log(props)
     props.handleMapHover(props.lat,props.lng)
     setState({
       show_text:true
@@ -51,7 +49,6 @@ const text_style={
 
   const _onMouseLeaveContent = (/*e*/) => {
     props.$onMouseAllow(true); 
-    console.log(1);
     props.handleMapHover(null,null)
     setState({
       show_text:false
