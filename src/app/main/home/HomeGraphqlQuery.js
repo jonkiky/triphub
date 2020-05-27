@@ -15,6 +15,7 @@ cities(query:{state: $stateId},limit:6) {
 		city
 		pictures
 		description
+		state
   }
 }
 	`;
