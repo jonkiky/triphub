@@ -35,7 +35,13 @@ const override = css`
 
 
 	const routeChange=(searchTerm)=> {
-    let path = `/search?term=` + searchTerm;
+	let term ="";
+	if(searchTerm){
+		term = searchTerm;
+	}else{
+		term =document.getElementById("react-google-places-autocomplete-input").value;
+	}
+    let path = `/search?term=` + term;
     history.push(path);
   }
 
@@ -99,7 +105,7 @@ const override = css`
 								      required
 								      placeholder={""}
 								    />
-									<button className="home_search_button"  disabled={searchTerm==null||searchTerm==""} onClick={()=>routeChange(searchTerm)}>search</button>
+									<button className="home_search_button"  disabled={searchTerm==null||searchTerm==""} onClick={()=>routeChange()}>search</button>
 								</div>
 							</form>
 						</div>
