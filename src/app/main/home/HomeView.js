@@ -22,7 +22,7 @@ const override = css`
 `;
 	
 	let history = useHistory();
- 	const [searchTerm,setSearchTerm] = useState("");
+ 	const [searchTerm,setSearchTerm] = useState(props.address);
 
  	useEffect(() => {
  		setSearchTerm(props.address);
@@ -99,7 +99,7 @@ const override = css`
 								      required
 								      placeholder={""}
 								    />
-									<button className="home_search_button"  disabled={searchTerm==null||searchTerm==""} onClick={()=>routeChange()}>search</button>
+									<button className="home_search_button"  disabled={searchTerm==null||searchTerm==""} onClick={()=>routeChange(searchTerm)}>search</button>
 								</div>
 							</form>
 						</div>
