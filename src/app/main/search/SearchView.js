@@ -69,10 +69,6 @@ const [state,setState] = useState({
  	let url =  "https://www.google.com/search?as_st=y&tbm=isch&as_q="+place+"&as_epq=&as_oq=&as_eq=&imgsz=&imgar=&imgc=&imgcolor=&imgtype=&cr=&as_sitesearch=&safe=images&as_filetype=&as_rights=";
  	window.open(url,"_blank")
  }
- // const handleShow = (lat,lng) => {
- //  	let path = `./place?term=`+props.geolocation+`&lat=` + lat +`&lng=`+lng;
- //    window.open(path, "_blank") //to open new page
- //  };
 
 const openCart=(event)=>{
 	event.preventDefault();
@@ -115,7 +111,7 @@ function  handlePageChange(pageNumber) {
     handleMap(lat,lng)
   }
 
- const onMouseLeaveContent = (/*e*/) => {
+ const onMouseLeaveContent = () => {
     handleMap(null,null)
   }
 
@@ -158,16 +154,10 @@ return (
 	
 <div className="search_news">
 			<div className="row">
-				<div className="col-lg-6" id="list-items">
-					<div className="row thing_to_do_section">
-						<div className="col-lg-12 ">
-							
-							<div className="loader_title">
-								<b>{props.totalNumberOfRecords}  Places To Go: </b>
-								{ props.geolocation} {' '} 
-							</div>
-						</div>
-					</div>
+				<div className="col-lg-8" id="list-items">
+					
+					
+
 					<div className="row filter_section">
 						<div className="col-lg-12">
 								<div className="filter-container">
@@ -231,8 +221,17 @@ return (
 						</div>
 					</div>
 					
+					<div className="row thing_to_do_section">
+						<div className="col-lg-12 ">
+							<div className="loader_title">
+								<b>{props.totalNumberOfRecords}  Places To Go </b>
+							</div>
+							<div className="loader_title">
+								 { props.geolocation} {' '} 
+							</div>
 
-
+						</div>
+					</div>
 
 					
 					<div className="news_container ">
@@ -246,7 +245,7 @@ return (
 												onMouseEnter={()=>onMouseEnterContent(place.lat,place.lng)}
          										onMouseLeave={onMouseLeaveContent}
           										style={place.lat==state.map_lat&&place.lng==state.map_lng? with_grey_border:null} 
-          										className="latest_post justify-content-start col-lg-6 col-sm-12 col-md-6" >
+          										className="latest_post justify-content-start col-lg-4 col-sm-12 col-md-4" >
 													<div className="latest_post_image"> 
 											                         <OverlayTrigger
 										                              key="Like_tool_tip"
@@ -464,10 +463,13 @@ return (
 												</div>
 
 											)
-									}): (<p> No place available </p>)
-
-
-
+									}): (
+									<div className="latest_post_content">
+														<div className="latest_post_title">
+																<a href="">No place available </a>
+											
+														</div>
+										</div>)
 								}
 								
 								</div>
@@ -503,7 +505,7 @@ return (
 
 				</div>
 			</div>
-				<div className=" d-flex col-lg-6">
+				<div className=" d-flex col-lg-4">
 							<div className="contact_map">
 								<div className="map">
 									<div id="google_map" className="google_map">

@@ -6,7 +6,7 @@ function SimpleMap(props){
 
 return (
       // Important! Always set the container height explicitly
-      <div style={{ height: '90vh', width: '50%' }}>
+      <div style={{ height: '90vh', width: '33%' }}>
         <GoogleMap
           bootstrapURLKeys={'AIzaSyD4GazFJE0ziwpJEjVMT4bWYtl-YClo1Yk'}
           center={{

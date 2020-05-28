@@ -18,7 +18,7 @@
     width: 100%;
     z-index: 10;
     left: 0;
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid #efefef;
     padding-left: 31px;
 }
 
@@ -70,10 +70,8 @@
 
 
 .filter-container {
-	border-top: solid #eae8e4 2px;
-	border-bottom: solid #eae8e4 2px;
-	margin: 12px auto;
-    padding: 10px;
+	margin: 5px auto 8px auto;
+    padding: 0px 10px 10px 0px;
 }
 .filter-container a{
 	line-height: 30px;
@@ -88,16 +86,16 @@
     font-size: 18px;
     color: #181818;
     font-weight: 400;
-    text-transform: uppercase;
-    padding: 0 10px;
+    padding: 0 2px;
 }
 
 .filter-button{
     margin:3px 2px;
 	background: white;
-	border: 1px solid #212529;
+	border: 1px solid #dddddd;
 	color:#212529;
-    border-radius: 0px;
+    cursor: pointer;
+    border-radius: 8px;
     font-size: 15px;
     line-height:1;
     display: inline-block;
@@ -171,7 +169,7 @@
 }
 
 .latest_post_content{
-	padding-left: 0px;
+	padding-left: 8px;
 }
 .latest_post_image{
 	width: 100%;
@@ -332,6 +330,7 @@
     width: 50px !important;
     border: 1px solid #181818 !important;
 }
+
 input[type=radio] {
     position: absolute;
     clip: rect(0,0,0,0);

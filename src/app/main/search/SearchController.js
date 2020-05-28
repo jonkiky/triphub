@@ -23,7 +23,7 @@ function SearchController() {
 		sorting_distance:null,			// sort by distance  [ desc | asc | null]
 		filter_distance:"5_miles",		// filter distance : 5_miles |half_day |one_day| two_day
 		activePage:1,					// Current page index
-		itemsCountPerPage:20,			//  number of items per page
+		itemsCountPerPage:21,			//  number of items per page
 		place_all_lat_lng_review:null,  //  places' information :  # of review |  lat | lng
 		lat:0.0,						// search place's lat
 		lng:0.0,						// search place's lng
