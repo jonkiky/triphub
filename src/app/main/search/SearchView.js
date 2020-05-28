@@ -271,11 +271,8 @@ return (
 															<a href="">
 																{place.place_name} 
 															</a>
-											
-
 														</div>
-														<div className="row">
-													        <div className="col-lg-12 place-help-button">
+													     <div className="place-help-button">
 													                 <a href={place.website_link!=""?place.website_link:"#"} className="btn filter-button help-icon" target="_blank">Website</a>
 													                 <a href={`https://www.google.com/maps/place/${place.place_name}`}  className="btn filter-button help-icon" target="_blank">Directions</a>
 											                        
@@ -294,8 +291,7 @@ return (
 							
 										                            </OverlayTrigger>
 
-                             						        </div>
-													    </div>
+                             						    </div>
 														<div className="latest_post_text">
 															 <StarRatings
 															        rating={place.score}

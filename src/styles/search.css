@@ -82,7 +82,7 @@
 }
 .loader_title
 {
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Helvetica','Arial','sans-serif';
     font-size: 18px;
     color: #181818;
     font-weight: 400;
@@ -134,7 +134,7 @@
 
 .stats-pagination{
 
-	font-family: 'Oswald', sans-serif;
+	font-family: 'Helvetica','Arial','sans-serif';
     font-size: 18px;
     font-weight: 400;
     color: #72728c;
@@ -227,7 +227,7 @@
     padding-top: 12px;
     padding-bottom: 12px;
     padding-left: 10%;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Helvetica','Arial','sans-serif';
     width: 100%;
 }
 .detail-pics {
@@ -241,7 +241,7 @@
      margin: 0 auto;
 }
 .modal .sub-title{
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Helvetica','Arial','sans-serif';
     font-size: 13px;
     font-weight: 300;
     color: #72728c;
@@ -285,6 +285,9 @@
 
 .float-left{
 	float: left;
+}
+.place-help-button{
+    margin-left: -4px;
 }
 
 .place-help-button .help-icon{
