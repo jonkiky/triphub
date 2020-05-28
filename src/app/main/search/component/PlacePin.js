@@ -19,7 +19,8 @@ const pin_style = {
 };
 
 const text_style={
-    width:" max-content",
+    width:"max-content",
+    color:"#181818",
     paddingLeft:"8px",
     paddingRight:"8px",
     background:" #fff",
