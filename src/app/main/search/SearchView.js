@@ -268,13 +268,11 @@ return (
 													</div>
 													<div className="latest_post_content">
 														<div className="latest_post_title">
-															<a href="">
-																{place.place_name} 
-															</a>
+																<h5>{place.place_name} </h5>
 														</div>
 													     <div className="place-help-button">
 													                 <a href={place.website_link!=""?place.website_link:"#"} className="btn filter-button help-icon" target="_blank">Website</a>
-													                 <a href={`https://www.google.com/maps/place/${place.place_name}`}  className="btn filter-button help-icon" target="_blank">Directions</a>
+													                 <a href={`https://www.google.com/maps/search/${place.place_name}`}  className="btn filter-button help-icon" target="_blank">Map</a>
 											                        
 											                         <OverlayTrigger
 										                              key="Like_tool_tip"

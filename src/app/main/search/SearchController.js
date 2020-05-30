@@ -77,6 +77,8 @@ function SearchController() {
 			    break;
 			}
  	}
+			   
+ 	c_state["activePage"]=1;
  	setState(c_state)
  }
 
