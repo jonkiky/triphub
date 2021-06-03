@@ -6,7 +6,7 @@ export function customGeocode(){
 
 
 // set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
-Geocode.setApiKey("AIzaSyD4GazFJE0ziwpJEjVMT4bWYtl-YClo1Yk");
+Geocode.setApiKey("");
 
 // set response language. Defaults to english.
 Geocode.setLanguage("en");
