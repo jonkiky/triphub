@@ -1,0 +1,24 @@
+.home-bg-author{
+	color: #fff;
+    opacity: 0.6;
+}
+
+.home-footer{
+	background: url("https://images.unsplash.com/photo-1541417904950-b855846fe074?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3250&q=80");
+	background-size:  100% auto;
+    padding-top: 5px;
+}
+
+.home-search{
+	font-family: 'Helvetica','Arial','sans-serif';
+    font-weight: 300;
+    font-size: 15px;
+    color: #111111;
+    text-align: left;
+    padding: 8px 5px 9px 9px;
+    border-bottom: 1px solid #181818;
+}
+
+.destination_image img{
+    width: 100vw;
+}

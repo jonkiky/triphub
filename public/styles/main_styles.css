@@ -692,24 +692,6 @@ section
 	padding-left: 67px;
 	padding-right: 83px;
 }
-
-.search_input_word
-{
-	height: 50px;
-    background: #f2f5f6;
-    border: none;
-    outline: none;
-    padding: 0px 14px;
-    font-family: 'Oswald', sans-serif;
-    font-size: 18px !important;
-    font-weight: 500 !important;
-    color: #72728c !important;
-    line-height: 50px;
-    margin-right: -32px;
-    width: 100px;
-}
-
-
 .search_input
 {
 	height: 50px;
@@ -740,7 +722,7 @@ section
 }
 .search_input_80
 {
-	width: 75%;
+	width: calc(100% - 20px);
 }
 .search_input::-webkit-input-placeholder
 {

@@ -1,6 +1,5 @@
 import React, {useState,useEffect} from 'react';
 import logo from '../../../logo.svg';
-import '../../../styles/main_styles.css'; 
 import '../../../styles/detail.css'; 
 import BounceLoader from "react-spinners/BarLoader";
 import { css } from "@emotion/core";

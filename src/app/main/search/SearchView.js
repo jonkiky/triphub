@@ -1,14 +1,5 @@
 import React, {useState,useEffect} from 'react';
 import logo from '../../../logo.svg';
-import '../../../styles/main_styles.css';	
-import '../../../styles/responsive.css';
-import '../../../styles/news.css';
-import '../../../styles/news_responsive.css';
-import '../../../styles/contact.css';
-import '../../../styles/contact_responsive.css';
-import '../../../styles/elements.css';
-import '../../../styles/elements_responsive.css';
-import '../../../styles/search.css';
 import BounceLoader from "react-spinners/BarLoader";
 import { css } from "@emotion/core";
 import SearchBarView  from "../../../@framework/SearchBar/SearchBarView";
@@ -23,7 +14,10 @@ import StarRatings from 'react-star-ratings';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteFromCartAction, addToCart} from '../cart/redux/CartAction'
 import {OverlayTrigger,Tooltip} from 'react-bootstrap';
-
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import '../../../styles/search.css';
+// If you want to use the provided css
+import 'react-google-places-autocomplete/dist/index.min.css';
 
 function SearchView(props) {
 
@@ -115,6 +109,15 @@ function  handlePageChange(pageNumber) {
     handleMap(null,null)
   }
 
+
+const [searchTerm,setSearchTerm] = useState('')
+ 
+
+const updateSearch = (e) => {
+		setSearchTerm(e.target.value);
+}
+
+
 return (
    <div className="super_container">
 
@@ -131,25 +134,30 @@ return (
       </div>
 
 	<header className="search_header">
-		<div >
-			<div className="row">
-				<div className="col">
-					<div className="header_content d-flex flex-row align-items-center justify-content-start">
-						<div className="header_content_inner d-flex flex-row align-items-end justify-content-start search_header_inner">
-							<div className="logo" ><Link to="/" style={{color:'black'}}>Travello</Link></div>
-									<SearchBarView handleSearch={handleSearch}/>
-									<div className="cart d-flex flex-row align-items-end justify-content-start">
+					<div className="header_content">
+						<div className="header_content_inner row">
+							<div className="logo col-sm-12 col-md-2 col-lg-2" ><Link to="/" style={{color:'black'}}>Travello</Link></div>
+							<div className="search col-sm-12 col-md-9 col-lg-9" >
+								<form action="search" class="home_search_form" id="home_search_form">
+													<GooglePlacesAutocomplete
+												      onSelect={(addr)=>handleSearch(addr.description)}
+												      initialValue={searchTerm} 
+												      inputClassName={"search_search_input" }
+												      required
+												      placeholder={""}
+												    />
+													<button class="search_search_button"  disabled={searchTerm==null||searchTerm==""} onClick={(event)=>handleSearch(event)}>search</button>
+								</form>
+							</div>
+							<div className="cart col-sm-12 col-md-1 col-lg-1">
 											<div className="intro_icon"><a href=""><img onClick={(event)=>openCart(event)} src="images/suitcase.svg" alt=""/></a></div>
 											<div className="intro_content">
 												{cart.length}
 											</div>
-										</div>
-									</div>
-								</div>
 							</div>
-							
+						
 					</div>
-		</div>
+				</div>
 	</header>
 	
 <div className="search_news">

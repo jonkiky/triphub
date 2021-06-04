@@ -4,23 +4,19 @@ import { useHistory } from 'react-router-dom';
 import BarLoader from "react-spinners/BarLoader";
 import { css } from "@emotion/core";
 import Skeleton from 'react-loading-skeleton';
-import '../../../styles/main_styles.css';
-import '../../../styles/responsive.css';
-import '../../../styles/home_styles.css';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import './HomeStyle.css';
 // If you want to use the provided css
 import 'react-google-places-autocomplete/dist/index.min.css';
  
 
-
 function HomeView(props) {
-
  
-const override = css`
-  display: block;
-  width:100%;
-`;
-	
+	const override = css`
+	  display: block;
+	  width:100%;
+	`;
+
 	let history = useHistory();
  	const [searchTerm,setSearchTerm] = useState(props.address);
 
@@ -64,10 +60,8 @@ const override = css`
         />
       </div>
 
-	
 
-	<div className="home">
-		
+	<div class="home">
 		<div className="home_slider_container">
 					<div className="background_image" style={{backgroundImage: 'url(images/jakob-owens-unsplash.jpg)'}}></div>
 					<div className="home_slider_content_container">
@@ -82,26 +76,24 @@ const override = css`
 
 						</div>
 						<div className="home-bg-author">Photo by Jakob Owens on Unsplash</div>
-
 					</div>
 		</div>
 	</div>
 
 
-	<div className="home_search">
-		<div className="container">
-			<div className="row">
-				<div className="col">
-					<div className="home_search_container">
-						<div className="home_search_title">Find Things To Do </div>
-						<div className="home_search_content">
-							<form action="search" className="home_search_form" id="home_search_form">
+	<div class="home_search">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="home_search_container">
+						<div class="home_search_title">Find Things To Do </div>
+						<div class="home_search_content">
+								<form action="search" className="home_search_form" id="home_search_form">
 								<div className="d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start">
-									<span className="search_input_word">Near</span>
 									<GooglePlacesAutocomplete
 								      onSelect={(addr)=>routeChange(addr.description)}
 								      initialValue={searchTerm} 
-								      inputClassName={"search_input search_input_80" }
+								      inputClassName={"search_input search_input_80"}
 								      required
 								      placeholder={""}
 								    />
@@ -116,37 +108,31 @@ const override = css`
 	</div>
 
 
-
-
-	<div className="destinations" id="destinations" >
-		<div className="container">
-			<div className="row">
-				<div className="col text-center">
-					<div className="section_subtitle">simply amazing places</div>
-					<div className="section_title"><h2>Popular Destinations</h2></div>
+	<div class="destinations" id="destinations">
+		<div class="container">
+			<div class="row">
+				<div class="col text-center">
+					<div class="section_subtitle">simply amazing places</div>
+					<div class="section_title"><h2>Popular Destinations</h2></div>
 				</div>
 			</div>
-			<div className="row destinations_row">
-				<div className="col">
-					<div className="destinations_container item_grid row">
-					{
-						props.data?props.data.cities.map((city)=>{
-								return (<div key={city._id} className="destination item col-4">
-									<div className="destination_image">
-										<img src={city.pictures&&city.pictures!=""?city.pictures.split("@")[0]:"/images/destination_1.jpg"} alt=""/>
+			<div class="row ">
+						{
+							props.data?props.data.cities.map((city)=>{
+									return (
+										<div key={city._id} className="col-sm-12 col-md-6 col-lg-4">
+										<div className="destination_image">
+											<img src={city.pictures&&city.pictures!=""?city.pictures.split("@")[0]:"/images/destination_1.jpg"} alt=""/>
+										</div>
+										<div className="destination_content">
+											<div className="destination_title"><a href="#" onClick={(event)=>routeChangeWithParam(event,city.city+","+city.state)}>{city.city}</a></div>
+											<div className="destination_subtitle"><p>{city.description}</p></div>
+										</div>
 									</div>
-									<div className="destination_content">
-										<div className="destination_title"><a href="#" onClick={(event)=>routeChangeWithParam(event,city.city+","+city.state)}>{city.city}</a></div>
-										<div className="destination_subtitle"><p>{city.description}</p></div>
-									</div>
-								</div>
-								)
-							})
-						:""
-					}
-						
-					</div>
-				</div>
+									)
+								})
+							:""
+						}
 			</div>
 		</div>
 	</div>
@@ -182,6 +168,10 @@ const override = css`
 		All rights reserved | This template is made with <i className="fas fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 		</div>
 	</footer>
+
+
+
+	
 </div>
   );
 }
