@@ -39,7 +39,6 @@ const with_grey_border ={
 
 
 const [state,setState] = useState({
-	show:false,
 	map_lat:null,   // interactive with map
 	map_lng:null,	// interactive with map
   });
@@ -66,9 +65,7 @@ const [state,setState] = useState({
 
 const openCart=(event)=>{
 	event.preventDefault();
-	let c_state = Object.assign({}, state);
-  	c_state["show"]=true;
-  	setState(c_state);
+	history.push("/cart");
 }
 
 const handleCartChange=(event,id)=>{
@@ -121,8 +118,6 @@ const updateSearch = (e) => {
 return (
    <div className="super_container">
 
-   <CartModal handleClose={handleClose} show={state.show}  searchImgOnGoogle={searchImgOnGoogle} handleCartChange={handleCartChange}/>
-
     <div className="sweet-loading">
         <BounceLoader
           css={override}
@@ -136,7 +131,7 @@ return (
 	<header className="search_header">
 					<div className="header_content">
 						<div className="header_content_inner row">
-							<div className="logo col-sm-12 col-md-2 col-lg-2" ><Link to="/" style={{color:'black'}}>Travello</Link></div>
+							<div className="logo col-sm-12 col-md-2 col-lg-2" ><Link to="/" style={{color:'black'}}>Hey! DMV</Link></div>
 							<div className="search col-sm-12 col-md-9 col-lg-9" >
 								<form action="search" class="home_search_form" id="home_search_form">
 													<GooglePlacesAutocomplete
@@ -169,9 +164,7 @@ return (
 					<div className="row filter_section">
 						<div className="col-lg-12">
 								<div className="filter-container">
-									<div className="row">
-										<div className="col-lg-12">
-												<div >
+									<div>
 													<label className={className({
 														'filter-button': true,
   														'active': props.state&&props.state.filter_distance&&props.state.filter_distance == "5_miles",
@@ -197,8 +190,6 @@ return (
 													})}  >
 													    <input type="radio" name="d_options" id="d-option3" checked={props.state&&props.state.filter_distance&&props.state.filter_distance == "two_day" }  onChange={()=>updateRadioOption("two_day","d_option")}/>  Two-Day Tours
 													</label>
-												</div>
-										</div>
 									</div>
 									
 									<div className="row">

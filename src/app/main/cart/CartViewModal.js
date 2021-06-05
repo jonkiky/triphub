@@ -4,40 +4,49 @@ import { useSelector, useDispatch } from 'react-redux';
 import PlaceImage from '../search/component/PlaceImage';
 import {OverlayTrigger,Tooltip} from 'react-bootstrap';
 import StarRatings from 'react-star-ratings';
+import { useHistory } from 'react-router-dom';
+import { deleteFromCartAction, addToCart} from '../cart/redux/CartAction'
 
 
 function CartModal(props) {
 
+const history = useHistory();
+const dispatch = useDispatch();
 
-  const handleClose = () => {
-  	props.handleClose();
+const handleClose = () => {
+  	history.goBack();
   };
 
+const cart = useSelector((state) => state.cart.places);
+
 const handleCartChange=(event,id)=>{
-	props.handleCartChange(event,id);
+	event.preventDefault();
+	if(cart.includes(id)){
+		// reomove from cart
+		dispatch(deleteFromCartAction({
+			"places":[id]
+		}));
+	}else{
+		// add into cart
+		dispatch(addToCart({
+			"places":[id]
+		}));
+	}
 }
 
  const searchImgOnGoogle=(event,place)=>{
- 	props.searchImgOnGoogle(event,place);
+ 	event.preventDefault();
+ 	let url =  "https://www.google.com/search?as_st=y&tbm=isch&as_q="+place+"&as_epq=&as_oq=&as_eq=&imgsz=&imgar=&imgc=&imgcolor=&imgtype=&cr=&as_sitesearch=&safe=images&as_filetype=&as_rights=";
+ 	window.open(url,"_blank")
  }
- 
 
- const places = props.data&&props.data.things_to_dos?props.data.things_to_dos:[];
-  
-
+const places = props.data&&props.data.things_to_dos?props.data.things_to_dos:[];
 												
 return (
-	<Modal show={props.show} onHide={handleClose}>
-        <Modal.Body>
-         <div className="modal-dialog modal-dialog-centered" role="document">
-         	<div className="detail-container">
+         	<div className="detail-container container">
 	         	<div className="row ">
-	         			<div className="title col ">
-				         	Saved Places
-						</div>
-
-	         			<div className="col ">
-				         	<button type="button" className="close-btn close" data-dismiss="modal" aria-label="Close" onClick={handleClose}>
+	         			<div className="col">
+				         	<button type="button" className="close-btn close" aria-label="Close" onClick={handleClose}>
 								          <span aria-hidden="true">&times;</span>
 							</button>
 						</div>
@@ -260,10 +269,6 @@ return (
 											}
 											</div>
 							</div>
-						</div>
-        </Modal.Body>
-       
-  </Modal>
 	)
 
 }

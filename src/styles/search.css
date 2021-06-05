@@ -34,9 +34,10 @@
 
 .search_search_input{
     height: 40px;
-    width: calc(100% - 120px);
+    width: calc(100% - 90px);
     float: left;
     background: #f2f5f6;
+    padding: 0 10px;
     border: none;
     outline: none;
     font-family: 'Oswald', sans-serif;
@@ -47,7 +48,7 @@
 
 .search_search_button
 {
-    width: 120px;
+    width: 90px;
     height: 40px;
     background: #181818;
     color: #FFFFFF;
@@ -426,7 +427,7 @@ input[type=radio] {
 @media only screen and (max-width: 767px)
 {
     .search_news {
-    margin-top: 150px;
+    margin-top: 120px;
     }
 
     .cart {
@@ -463,5 +464,15 @@ input[type=radio] {
         padding-left: 0px;
         text-align: center;
         font-size: 14px;
+    }
+
+    .search_search_input{
+        float: none;
+    }
+
+    .search_search_button{
+        position: absolute;
+        right: -4px;
+        top: 10px;
     }
 }
