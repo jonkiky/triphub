@@ -50,7 +50,7 @@ function HomeView(props) {
 
   return (
 
-   <div className="super_container">
+   <div className="super_container container">
 	 <div className="sweet-loading">
         <BarLoader
           css={override}
@@ -95,7 +95,7 @@ function HomeView(props) {
 								      initialValue={searchTerm} 
 								      inputClassName={"search_input search_input_80"}
 								      required
-								      placeholder={""}
+								      placeholder={"Find things to do near location"}
 								    />
 									<button className="home_search_button"  disabled={searchTerm==null||searchTerm==""} onClick={()=>routeChange()}>search</button>
 								</div>
@@ -152,8 +152,7 @@ function HomeView(props) {
 								<div className="footer_contact_title">send us a message</div>
 								<div className="footer_contact_list">
 									<ul>
-										<li>youremail@gmail.com</li>
-										<li>Office@yourbusinessname.com</li>
+										<li>jonkiky@gmail.com</li>
 									</ul>
 								</div>
 							</div>
@@ -168,10 +167,6 @@ function HomeView(props) {
 		All rights reserved | This template is made with <i className="fas fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 		</div>
 	</footer>
-
-
-
-	
 </div>
   );
 }

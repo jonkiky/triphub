@@ -6,7 +6,6 @@ import SearchBarView  from "../../../@framework/SearchBar/SearchBarView";
 import Pagination from "react-js-pagination";
 import className from "classnames";
 import SimpleMap from "./component/GoogleMap";
-import CartModal from "../cart/CartController";
 import PlaceImage from "./component/PlaceImage";
 import { Link} from "react-router-dom";
 import { useHistory } from 'react-router-dom';
@@ -116,9 +115,9 @@ const updateSearch = (e) => {
 
 
 return (
-   <div className="super_container">
+   <div className="super_container container">
 
-    <div className="sweet-loading">
+  	  <div className="sweet-loading">
         <BounceLoader
           css={override}
           height={8}
@@ -139,7 +138,7 @@ return (
 												      initialValue={searchTerm} 
 												      inputClassName={"search_search_input" }
 												      required
-												      placeholder={""}
+												      placeholder={"Find things to do near location"}
 												    />
 													<button class="search_search_button"  disabled={searchTerm==null||searchTerm==""} onClick={(event)=>handleSearch(event)}>search</button>
 								</form>
