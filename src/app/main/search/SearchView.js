@@ -156,10 +156,7 @@ return (
 	
 <div className="search_news">
 			<div className="row">
-				<div className="col-lg-8" id="list-items">
-					
-					
-
+				<div className="col-lg-8 col-sm-12" id="list-items">
 					<div className="row filter_section">
 						<div className="col-lg-12">
 								<div className="filter-container">
@@ -191,9 +188,7 @@ return (
 													</label>
 									</div>
 									
-									<div className="row">
-										<div className="col-lg-12">
-											<div  >
+									<div  >
 													<label className={className({
 														'filter-button': true,
   														'active': props.state&&props.state.sorting_review&&props.state.sorting_review== "desc",
@@ -212,8 +207,44 @@ return (
 													})} >
 													    <input type="radio" name="s_options" id="s-option3" checked={props.state&&props.state.sorting_distance&&props.state.sorting_distance == "asc" } onChange={()=>updateRadioOption("distanceF","s_option")} />  Distance Far
 													</label>
-												</div>
-										</div>
+									</div>
+									<div>
+													<label className={className({
+														'filter-button': true,
+  														'active': false,
+													})}  >
+													    <input type="radio" name="s_options" id="s-option1" checked={props.sorting_review == "desc" } onChange={()=>updateRadioOption("reviewN","s_option")}  /> Beach
+													</label>
+													<label className={className({
+														'filter-button': true,
+  														'active': false,
+													})} >
+													    <input type="radio" name="s_options" id="s-option3" checked={props.state&&props.state.sorting_distance&&props.state.sorting_distance == "desc" } onChange={()=>updateRadioOption("distanceN","s_option")} />  Playground
+													</label>
+													<label className={className({
+														'filter-button': true,
+  														'active': false,
+													})} >
+													    <input type="radio" name="s_options" id="s-option3" checked={props.state&&props.state.sorting_distance&&props.state.sorting_distance == "asc" } onChange={()=>updateRadioOption("distanceF","s_option")} />  Zoo
+													</label>
+														<label className={className({
+														'filter-button': true,
+  														'active': false,
+													})}  >
+													    <input type="radio" name="s_options" id="s-option1" checked={props.sorting_review == "desc" } onChange={()=>updateRadioOption("reviewN","s_option")}  /> Indoor 
+													</label>
+													<label className={className({
+														'filter-button': true,
+  														'active': false,
+													})} >
+													    <input type="radio" name="s_options" id="s-option3" checked={props.state&&props.state.sorting_distance&&props.state.sorting_distance == "desc" } onChange={()=>updateRadioOption("distanceN","s_option")} />  Events
+													</label>
+													<label className={className({
+														'filter-button': true,
+  														'active': false,
+													})} >
+													    <input type="radio" name="s_options" id="s-option3" checked={props.state&&props.state.sorting_distance&&props.state.sorting_distance == "asc" } onChange={()=>updateRadioOption("distanceF","s_option")} />  Guide
+													</label>
 									</div>
 								</div>
 						</div>

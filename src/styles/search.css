@@ -98,6 +98,13 @@
 	margin: 5px auto 8px auto;
     padding: 0px 10px 10px 0px;
 }
+
+.filter-container div{
+    max-width:  100%;
+    overflow: scroll;
+    display: inline-flex;
+}
+
 .filter-container a{
 	line-height: 30px;
 }
